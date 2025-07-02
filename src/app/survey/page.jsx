@@ -101,10 +101,10 @@ export default function SurveyPage() {
     {
       id: 10,
       category: 'S/N',
-      text: 'When planning travel, what do you focus on more?',
+      text: 'When planning a trip, what do you focus on most?',
       choices: [
-        { id: 'A', text: 'I prefer places I\'ve been before or well-known destinations', type: 'S' },
-        { id: 'B', text: 'I look forward to new places and unexpected discoveries', type: 'N' }
+        { id: 'A', text: 'I prefer familiar places or well-known destinations', type: 'S' },
+        { id: 'B', text: 'I look forward to discovering new places and unexpected experiences', type: 'N' }
       ]
     },
     {
@@ -113,7 +113,7 @@ export default function SurveyPage() {
       text: 'When working on tasks, which approach do you prefer?',
       choices: [
         { id: 'A', text: 'I proceed step by step and check details carefully', type: 'S' },
-        { id: 'B', text: 'I understand the overall flow and draw the big picture first', type: 'N' }
+        { id: 'B', text: 'I grasp the overall flow and start with the big picture', type: 'N' }
       ]
     },
     {
@@ -122,7 +122,7 @@ export default function SurveyPage() {
       text: 'When reading books or watching movies, what do you prefer?',
       choices: [
         { id: 'A', text: 'I prefer realistic content based on actual experiences', type: 'S' },
-        { id: 'B', text: 'I prefer content that stimulates imagination and shows new worlds', type: 'N' }
+        { id: 'B', text: 'I prefer imaginative content that shows new worlds', type: 'N' }
       ]
     },
     
@@ -133,25 +133,25 @@ export default function SurveyPage() {
       text: 'When making important decisions, what do you consider most important?',
       choices: [
         { id: 'A', text: 'I make judgments based on objective facts and logical analysis', type: 'T' },
-        { id: 'B', text: 'I prioritize the feelings and relationships of people involved', type: 'F' }
+        { id: 'B', text: 'I primarily consider the feelings and relationships of people involved', type: 'F' }
       ]
     },
     {
       id: 14,
       category: 'T/F',
-      text: 'How do you respond when someone makes a mistake?',
+      text: 'When someone makes a mistake, how do you respond?',
       choices: [
         { id: 'A', text: 'I focus on the cause of the problem and point out solutions', type: 'T' },
-        { id: 'B', text: 'I consider their feelings first and offer encouragement and comfort', type: 'F' }
+        { id: 'B', text: 'I first consider their feelings and offer encouragement and comfort', type: 'F' }
       ]
     },
     {
       id: 15,
       category: 'T/F',
-      text: 'What attitude do you take in arguments or conflict situations?',
+      text: 'In arguments or conflict situations, what attitude do you take?',
       choices: [
         { id: 'A', text: 'I make fair judgments based on facts and logic', type: 'T' },
-        { id: 'B', text: 'I consider everyone\'s feelings and strive for harmony', type: 'F' }
+        { id: 'B', text: 'I try to understand everyone\'s feelings and create harmony', type: 'F' }
       ]
     },
     {
@@ -159,26 +159,26 @@ export default function SurveyPage() {
       category: 'T/F',
       text: 'When giving advice, how do you help others?',
       choices: [
-        { id: 'A', text: 'I provide practical solutions that will be helpful in the future', type: 'T' },
+        { id: 'A', text: 'I suggest practical solutions that can be helpful in the future', type: 'T' },
         { id: 'B', text: 'I empathize with their emotions and offer comfort and encouragement', type: 'F' }
       ]
     },
     {
       id: 17,
       category: 'T/F',
-      text: 'When evaluating others, what do you consider more important?',
+      text: 'When evaluating others, what do you consider most important?',
       choices: [
-        { id: 'A', text: 'I objectively assess their abilities and achievements', type: 'T' },
+        { id: 'A', text: 'I objectively assess their abilities, performance, and achievements', type: 'T' },
         { id: 'B', text: 'I first consider their intentions, efforts, and human qualities', type: 'F' }
       ]
     },
     {
       id: 18,
       category: 'T/F',
-      text: 'When making important decisions, which criteria do you value more?',
+      text: 'When deciding on important matters, which standards do you prioritize?',
       choices: [
-        { id: 'A', text: 'I value fairness, principles, and consistent standards', type: 'T' },
-        { id: 'B', text: 'I prioritize human emotions and individual circumstances', type: 'F' }
+        { id: 'A', text: 'I emphasize fairness, principles, and consistent standards', type: 'T' },
+        { id: 'B', text: 'I prioritize human emotions and personal circumstances', type: 'F' }
       ]
     },
     
@@ -188,7 +188,7 @@ export default function SurveyPage() {
       category: 'J/P',
       text: 'How do you prefer to manage your daily life?',
       choices: [
-        { id: 'A', text: 'I make plans in advance and proceed systematically according to schedule', type: 'J' },
+        { id: 'A', text: 'I plan ahead and proceed systematically according to schedule', type: 'J' },
         { id: 'B', text: 'I respond flexibly to situations and let things flow naturally', type: 'P' }
       ]
     },
@@ -197,32 +197,32 @@ export default function SurveyPage() {
       category: 'J/P',
       text: 'How do you feel when you have unfinished tasks?',
       choices: [
-        { id: 'A', text: 'I feel uncomfortable and anxious, wanting to finish them quickly', type: 'J' },
-        { id: 'B', text: 'I don\'t feel rushed and am okay with proceeding slowly', type: 'P' }
+        { id: 'A', text: 'I feel uncomfortable and worried, wanting to finish quickly', type: 'J' },
+        { id: 'B', text: 'I don\'t need to rush and can proceed slowly', type: 'P' }
       ]
     },
     {
       id: 21,
       category: 'J/P',
-      text: 'What are your thoughts on appointments and plans?',
+      text: 'What are your thoughts about appointments and plans?',
       choices: [
         { id: 'A', text: 'I think appointments are important commitments that must be kept', type: 'J' },
-        { id: 'B', text: 'I think of them as flexible guidelines that can change with circumstances', type: 'P' }
+        { id: 'B', text: 'I think they are flexible guidelines that can change based on circumstances', type: 'P' }
       ]
     },
     {
       id: 22,
       category: 'J/P',
-      text: 'What style do you prefer when going on trips?',
+      text: 'When traveling, which style do you prefer?',
       choices: [
-        { id: 'A', text: 'I book everything in advance - schedule, accommodation, and attractions', type: 'J' },
-        { id: 'B', text: 'I make rough plans and decide things spontaneously at the destination', type: 'P' }
+        { id: 'A', text: 'I book all schedules, accommodations, and tourist spots in advance', type: 'J' },
+        { id: 'B', text: 'I make rough plans and decide spontaneously at the destination', type: 'P' }
       ]
     },
     {
       id: 23,
       category: 'J/P',
-      text: 'When working on tasks, which approach do you prefer?',
+      text: 'When working on projects, which approach do you prefer?',
       choices: [
         { id: 'A', text: 'I proceed step by step from beginning to end in order', type: 'J' },
         { id: 'B', text: 'I start with what I want to do and proceed freely', type: 'P' }
@@ -231,10 +231,10 @@ export default function SurveyPage() {
     {
       id: 24,
       category: 'J/P',
-      text: 'How do you behave when you need to make choices?',
+      text: 'In situations where you need to make choices, what are you like?',
       choices: [
-        { id: 'A', text: 'After sufficient consideration, I make a decision and don\'t change it', type: 'J' },
-        { id: 'B', text: 'I often postpone choices and decide at the last moment', type: 'P' }
+        { id: 'A', text: 'After sufficient consideration, I decide and don\'t change it', type: 'J' },
+        { id: 'B', text: 'I often postpone decisions and decide at the last moment', type: 'P' }
       ]
     }
   ];
@@ -249,7 +249,13 @@ export default function SurveyPage() {
   const handleNext = () => {
     if (selectedChoice === null) return;
 
-    const newAnswers = [...answers, selectedChoice];
+    const newAnswers = [...answers, {
+      questionId: questions[currentQuestion].id,
+      choice: selectedChoice,
+      type: questions[currentQuestion].choices.find(c => c.id === selectedChoice).type,
+      category: questions[currentQuestion].category
+    }];
+    
     setAnswers(newAnswers);
     setSelectedChoice(null);
 
@@ -272,31 +278,44 @@ export default function SurveyPage() {
   const handleSubmit = async (finalAnswers) => {
     setIsSubmitting(true);
     
-    // Senior-friendly loading time
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // MBTI score calculation (24 questions, 6 per dimension)
-    const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    
-    finalAnswers.forEach((answer, index) => {
-      const question = questions[index];
-      const choice = question.choices.find(c => c.id === answer);
-      if (choice) {
-        scores[choice.type]++;
-      }
-    });
-    
-    // Determine MBTI type
-    const mbtiType = 
-      (scores.E > scores.I ? 'E' : 'I') +
-      (scores.S > scores.N ? 'S' : 'N') +
-      (scores.T > scores.F ? 'T' : 'F') +
-      (scores.J > scores.P ? 'J' : 'P');
-    
-    console.log('MBTI scores:', scores);
-    console.log('Final type:', mbtiType);
-    
-    router.push(`/result/${mbtiType}`);
+    try {
+      // Calculate MBTI type
+      const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+      
+      finalAnswers.forEach(answer => {
+        scores[answer.type]++;
+      });
+
+      const mbtiType = 
+        (scores.E > scores.I ? 'E' : 'I') +
+        (scores.S > scores.N ? 'S' : 'N') +
+        (scores.T > scores.F ? 'T' : 'F') +
+        (scores.J > scores.P ? 'J' : 'P');
+
+      // Generate result ID
+      const resultId = Date.now().toString();
+      
+      // Save to localStorage
+      const resultData = {
+        mbtiType,
+        scores,
+        answers: finalAnswers,
+        completedAt: new Date().toISOString(),
+        language: 'en'
+      };
+      
+      localStorage.setItem(`mbti-result-${resultId}`, JSON.stringify(resultData));
+      
+      // Auto redirect to result page after 2 seconds
+      setTimeout(() => {
+        router.push(`/result/${resultId}`);
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Error calculating results:', error);
+      alert('An error occurred while calculating results. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   // Keyboard navigation
@@ -319,246 +338,143 @@ export default function SurveyPage() {
 
   return (
     <div className="survey-container">
-      {/* Header */}
-      <header className="survey-header">
-        <div className="container">
-          <div className="header-content">
-            <button 
-              onClick={() => router.push('/')}
-              className="back-button"
-              aria-label="Return to home"
-            >
-              ← {t('survey.home')}
-            </button>
-            
-            <div className="progress-info">
-              <span className="question-counter">
-                {currentQuestion + 1} / {questions.length}
-              </span>
-            </div>
-          </div>
+      {/* Progress Bar */}
+      <div className="progress-header">
+        <div className="progress-info">
+          <span className="progress-text">Question {currentQuestion + 1} / {questions.length}</span>
+          <span className="progress-percent">{Math.round(progress)}%</span>
         </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="survey-main">
-        <div className="container">
-          {/* Progress Bar */}
-          <div className="progress-section">
-            <div className="progress-label">
-              <span className="progress-text">{t('survey.progress')}</span>
-              <span className="progress-percentage">{Math.round(progress)}%</span>
-            </div>
-            <div className="progress-bar">
-              <div 
-                className="progress-fill"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          </div>
-
-          {/* Question Card */}
-          <div className="question-card">
-            <div className="question-header">
-              <div className="question-number">
-                <span className="question-icon">❓</span>
-                <span className="question-label">
-                  {t('survey.question')} {currentQuestion + 1}
-                </span>
-              </div>
-              
-              {currentQuestion < questions.length - 1 ? (
-                <div className="remaining-questions">
-                  {questions.length - currentQuestion - 1} remaining
-                </div>
-              ) : (
-                <div className="final-question">
-                  Final question!
-                </div>
-              )}
-            </div>
-
-            <div className="question-content">
-              <h2 className="question-text">
-                {currentQ.text}
-              </h2>
-              
-              <p className="question-hint">
-                {t('survey.hint')}
-              </p>
-
-              <div className="choices-container">
-                {currentQ.choices.map((choice, index) => (
-                  <button
-                    key={choice.id}
-                    onClick={() => handleChoiceSelect(choice.id)}
-                    className={`choice-button senior-choice ${
-                      selectedChoice === choice.id ? 'choice-selected' : ''
-                    }`}
-                    aria-label={`Choice ${choice.id}: ${choice.text}`}
-                  >
-                    <div className="choice-label">
-                      <span className="choice-letter">{choice.id}</span>
-                      <span className="choice-number">({index + 1} key)</span>
-                    </div>
-                    <div className="choice-content">
-                      <span className="choice-text">{choice.text}</span>
-                    </div>
-                    <div className="choice-indicator">
-                      {selectedChoice === choice.id && (
-                        <div className="selected-icon">✓</div>
-                      )}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="navigation">
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              className="nav-button nav-previous"
-            >
-              <span className="nav-icon">←</span>
-              <span className="nav-text">{t('survey.previous')}</span>
-            </button>
-
-            <div className="nav-center">
-              <div className="keyboard-hint">
-                💡 Keyboard shortcuts: 1(A) / 2(B)
-              </div>
-            </div>
-
-            <button
-              onClick={handleNext}
-              disabled={selectedChoice === null}
-              className={`nav-button nav-next ${isSubmitting ? 'nav-submitting' : ''}`}
-            >
-              <span className="nav-text">
-                {isSubmitting ? t('survey.processing') : 
-                 currentQuestion === questions.length - 1 ? t('survey.submit') : t('survey.next')}
-              </span>
-              {isSubmitting ? (
-                <div className="loading-spinner">
-                  <div className="spinner"></div>
-                </div>
-              ) : (
-                <span className="nav-icon">→</span>
-              )}
-            </button>
-          </div>
+        <div className="progress-bar">
+          <div 
+            className="progress-fill" 
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
-      </main>
+      </div>
+
+      {/* Question Card */}
+      <div className="question-card">
+        <div className="question-category">
+          {currentQ.category} Dimension · Question {currentQuestion + 1}
+        </div>
+        
+        <h2 className="question-text">
+          {currentQ.text}
+        </h2>
+
+        <div className="choices-container">
+          {currentQ.choices.map((choice) => (
+            <button
+              key={choice.id}
+              className={`choice-button ${selectedChoice === choice.id ? 'selected' : ''}`}
+              onClick={() => handleChoiceSelect(choice.id)}
+            >
+              <div className="choice-label">{choice.id}</div>
+              <div className="choice-text">{choice.text}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className="navigation-buttons">
+        <button
+          className="nav-button prev-button"
+          onClick={handlePrevious}
+          disabled={currentQuestion === 0}
+        >
+          Previous Question
+        </button>
+        
+        <button
+          className="nav-button next-button"
+          onClick={handleNext}
+          disabled={selectedChoice === null || isSubmitting}
+        >
+          {isSubmitting ? 'Processing...' : 
+           currentQuestion === questions.length - 1 ? 'Get Results' : 'Next Question'}
+        </button>
+      </div>
 
       <style jsx>{`
         .survey-container {
           min-height: 100vh;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          position: relative;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
         }
 
-        .container {
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 0 20px;
+        .survey-container::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 120, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%);
+          pointer-events: none;
         }
 
-        /* Header */
-        .survey-header {
-          background: white;
-          border-bottom: 1px solid #e5e7eb;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          position: sticky;
-          top: 0;
+        .progress-header {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 24px;
+          padding: 32px;
+          margin-bottom: 32px;
+          box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          position: relative;
           z-index: 10;
-        }
-
-        .header-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 16px 0;
-        }
-
-        .back-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: #f3f4f6;
-          border: 1px solid #d1d5db;
-          border-radius: 12px;
-          padding: 12px 16px;
-          font-size: 14px;
-          font-weight: 600;
-          color: #374151;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .back-button:hover {
-          background: #e5e7eb;
-          border-color: #9ca3af;
         }
 
         .progress-info {
           display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .question-counter {
-          background: #eff6ff;
-          color: #1d4ed8;
-          padding: 8px 16px;
-          border-radius: 20px;
-          font-size: 14px;
-          font-weight: 700;
-        }
-
-        /* Main Content */
-        .survey-main {
-          padding: 40px 0;
-        }
-
-        /* Progress Section */
-        .progress-section {
-          margin-bottom: 40px;
-        }
-
-        .progress-label {
-          display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 12px;
+          margin-bottom: 20px;
         }
 
         .progress-text {
-          font-size: 16px;
-          font-weight: 600;
-          color: #374151;
+          font-size: 20px;
+          font-weight: 700;
+          color: #1F2937;
+          background: linear-gradient(45deg, #1F2937, #4F46E5);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
-        .progress-percentage {
-          font-size: 18px;
-          font-weight: 700;
-          color: #1d4ed8;
+        .progress-percent {
+          font-size: 24px;
+          font-weight: 800;
+          background: linear-gradient(45deg, #4F46E5, #7C3AED);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
         }
 
         .progress-bar {
           width: 100%;
           height: 12px;
-          background: #e5e7eb;
-          border-radius: 6px;
+          background: rgba(229, 231, 235, 0.8);
+          border-radius: 12px;
           overflow: hidden;
+          box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .progress-fill {
           height: 100%;
-          background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-          border-radius: 6px;
-          transition: width 0.6s ease;
+          background: linear-gradient(90deg, #4F46E5, #7C3AED, #EC4899);
+          border-radius: 12px;
+          transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 
+            0 0 20px rgba(79, 70, 229, 0.5),
+            inset 0 1px 2px rgba(255, 255, 255, 0.3);
           position: relative;
         }
 
@@ -566,363 +482,355 @@ export default function SurveyPage() {
           content: '';
           position: absolute;
           top: 0;
-          left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-          animation: shimmer 2s infinite;
+          width: 20px;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4));
+          animation: shine 2s infinite;
         }
 
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+        @keyframes shine {
+          0% { transform: translateX(-20px); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateX(20px); opacity: 0; }
         }
 
-        /* Question Card */
         .question-card {
-          background: white;
-          border-radius: 24px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 32px;
+          padding: 48px;
+          margin-bottom: 32px;
+          box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          flex: 1;
+          position: relative;
+          z-index: 10;
           overflow: hidden;
-          margin-bottom: 40px;
         }
 
-        .question-header {
-          background: linear-gradient(45deg, #667eea, #764ba2);
-          padding: 24px 32px;
-          display: flex;
-          justify-content: space-between;
+        .question-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.5), transparent);
+        }
+
+        .question-category {
+          display: inline-flex;
           align-items: center;
-        }
-
-        .question-number {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .question-icon {
-          font-size: 24px;
-        }
-
-        .question-label {
+          background: linear-gradient(135deg, #4F46E5, #7C3AED);
           color: white;
-          font-size: 18px;
+          padding: 12px 24px;
+          border-radius: 25px;
+          font-size: 16px;
           font-weight: 700;
+          margin-bottom: 32px;
+          box-shadow: 
+            0 8px 25px rgba(79, 70, 229, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          position: relative;
+          overflow: hidden;
         }
 
-        .remaining-questions,
-        .final-question {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 14px;
-          font-weight: 600;
-          background: rgba(255, 255, 255, 0.2);
-          padding: 8px 16px;
-          border-radius: 20px;
+        .question-category::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          animation: categoryShine 3s infinite;
         }
 
-        .final-question {
-          background: linear-gradient(45deg, #f59e0b, #eab308);
-        }
-
-        .question-content {
-          padding: 40px 32px;
+        @keyframes categoryShine {
+          0% { left: -100%; }
+          100% { left: 100%; }
         }
 
         .question-text {
-          font-size: 24px;
-          font-weight: 700;
-          color: #1f2937;
-          line-height: 1.4;
-          margin: 0 0 16px 0;
+          font-size: 32px;
+          font-weight: 800;
+          background: linear-gradient(135deg, #1F2937, #4F46E5);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1.3;
+          margin-bottom: 48px;
+          position: relative;
         }
 
-        .question-hint {
-          font-size: 16px;
-          color: #6b7280;
-          margin: 0 0 32px 0;
-          text-align: center;
-          padding: 12px 20px;
-          background: #f9fafb;
-          border-radius: 12px;
-          border-left: 4px solid #3b82f6;
-        }
-
-        /* Senior-friendly 2-choice container */
         .choices-container {
           display: flex;
           flex-direction: column;
-          gap: 24px;
-          margin-top: 32px;
-          max-width: 700px;
-          margin-left: auto;
-          margin-right: auto;
+          gap: 20px;
         }
 
-        /* Senior-friendly choice button */
-        .senior-choice {
+        .choice-button {
           display: flex;
           align-items: center;
           gap: 24px;
-          padding: 24px 32px;
-          background: #ffffff;
-          border: 3px solid #e5e7eb;
-          border-radius: 20px;
+          padding: 32px;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(229, 231, 235, 0.8);
+          border-radius: 24px;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           text-align: left;
           width: 100%;
           position: relative;
-          min-height: 100px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
         }
 
-        .senior-choice:hover {
-          border-color: #3b82f6;
-          background: #f8fafc;
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+        .choice-button::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+          opacity: 0;
+          transition: opacity 0.3s ease;
         }
 
-        .choice-selected {
-          border-color: #22c55e !important;
-          background: #f0fdf4 !important;
-          box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
-          transform: translateY(-3px);
+        .choice-button:hover {
+          border-color: rgba(79, 70, 229, 0.5);
+          background: rgba(255, 255, 255, 0.95);
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 
+            0 20px 40px rgba(79, 70, 229, 0.15),
+            0 0 0 1px rgba(79, 70, 229, 0.1);
+        }
+
+        .choice-button:hover::before {
+          opacity: 1;
+        }
+
+        .choice-button.selected {
+          border-color: #4F46E5;
+          background: linear-gradient(135deg, 
+            rgba(238, 242, 255, 0.9), 
+            rgba(243, 232, 255, 0.9));
+          box-shadow: 
+            0 0 0 2px rgba(79, 70, 229, 0.3),
+            0 20px 40px rgba(79, 70, 229, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+          transform: translateY(-2px) scale(1.01);
+        }
+
+        .choice-button.selected::before {
+          opacity: 1;
         }
 
         .choice-label {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          min-width: 80px;
-          flex-shrink: 0;
-        }
-
-        .choice-letter {
-          width: 50px;
-          height: 50px;
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-          color: white;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 800;
-          font-size: 24px;
-          margin-bottom: 8px;
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .choice-selected .choice-letter {
-          background: linear-gradient(135deg, #22c55e, #16a34a);
-          box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
-        }
-
-        .choice-number {
-          font-size: 12px;
-          color: #6b7280;
-          font-weight: 600;
-          text-align: center;
-        }
-
-        .choice-content {
-          flex: 1;
-          padding: 0 16px;
-        }
-
-        .choice-text {
-          font-size: 18px;
-          font-weight: 600;
-          color: #1f2937;
-          line-height: 1.6;
-          word-break: keep-all;
-        }
-
-        .choice-indicator {
-          width: 40px;
-          height: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-        }
-
-        .selected-icon {
-          width: 32px;
-          height: 32px;
-          background: #22c55e;
+          width: 56px;
+          height: 56px;
+          background: linear-gradient(135deg, #4F46E5, #7C3AED);
           color: white;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 18px;
+          font-size: 24px;
           font-weight: 800;
-          animation: checkmark 0.3s ease-in-out;
+          flex-shrink: 0;
+          box-shadow: 
+            0 8px 25px rgba(79, 70, 229, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          position: relative;
+          overflow: hidden;
         }
 
-        @keyframes checkmark {
-          0% { transform: scale(0); }
-          50% { transform: scale(1.2); }
-          100% { transform: scale(1); }
+        .choice-label::after {
+          content: '';
+          position: absolute;
+          inset: 2px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
         }
 
-        /* Navigation */
-        .navigation {
+        .choice-text {
+          font-size: 20px;
+          font-weight: 600;
+          color: #374151;
+          line-height: 1.5;
+          flex: 1;
+        }
+
+        .navigation-buttons {
           display: flex;
           justify-content: space-between;
-          align-items: center;
-          gap: 20px;
+          gap: 24px;
+          position: relative;
+          z-index: 10;
         }
 
         .nav-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 16px 24px;
-          border-radius: 16px;
-          font-size: 16px;
-          font-weight: 600;
+          flex: 1;
+          padding: 20px 32px;
+          border: none;
+          border-radius: 20px;
+          font-size: 20px;
+          font-weight: 700;
           cursor: pointer;
-          transition: all 0.3s ease;
-          border: 2px solid;
-          min-width: 140px;
-          justify-content: center;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
         }
 
-        .nav-previous {
-          background: white;
-          color: #6b7280;
-          border-color: #d1d5db;
+        .prev-button {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          color: #6B7280;
+          border: 2px solid rgba(229, 231, 235, 0.8);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-previous:hover:not(:disabled) {
-          background: #f3f4f6;
-          border-color: #9ca3af;
+        .prev-button:hover:not(:disabled) {
+          background: rgba(255, 255, 255, 0.95);
+          border-color: #D1D5DB;
+          color: #374151;
+          transform: translateY(-2px);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
         }
 
-        .nav-previous:disabled {
-          opacity: 0.4;
+        .prev-button:disabled {
+          opacity: 0.5;
           cursor: not-allowed;
         }
 
-        .nav-next {
-          background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+        .next-button {
+          background: linear-gradient(135deg, #4F46E5, #7C3AED);
           color: white;
-          border-color: #3b82f6;
+          box-shadow: 
+            0 8px 25px rgba(79, 70, 229, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        .nav-next:hover:not(:disabled) {
-          background: linear-gradient(45deg, #2563eb, #1e40af);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        .next-button::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+          opacity: 0;
+          transition: opacity 0.3s ease;
         }
 
-        .nav-next:disabled {
+        .next-button:hover:not(:disabled) {
+          background: linear-gradient(135deg, #4338CA, #6D28D9);
+          transform: translateY(-4px);
+          box-shadow: 
+            0 16px 40px rgba(79, 70, 229, 0.4),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .next-button:hover:not(:disabled)::before {
+          opacity: 1;
+        }
+
+        .next-button:disabled {
           opacity: 0.6;
           cursor: not-allowed;
           transform: none;
         }
 
-        .nav-center {
-          flex: 1;
-          text-align: center;
-        }
-
-        .keyboard-hint {
-          font-size: 14px;
-          color: #6b7280;
-          background: white;
-          padding: 8px 16px;
-          border-radius: 8px;
-          border: 1px solid #e5e7eb;
-        }
-
-        .loading-spinner {
-          margin-left: 8px;
-        }
-
-        .spinner {
-          width: 16px;
-          height: 16px;
-          border: 2px solid rgba(255, 255, 255, 0.3);
-          border-top: 2px solid white;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-          .container {
-            padding: 0 16px;
+          .survey-container {
+            padding: 16px;
           }
 
-          .survey-main {
-            padding: 24px 0;
+          .progress-header {
+            padding: 24px;
+            margin-bottom: 24px;
           }
 
-          .question-header {
-            padding: 20px 24px;
-            flex-direction: column;
-            gap: 12px;
-            text-align: center;
-          }
-
-          .question-content {
+          .question-card {
             padding: 32px 24px;
           }
 
           .question-text {
-            font-size: 20px;
+            font-size: 26px;
           }
 
           .choice-button {
-            flex-direction: column;
-            text-align: center;
-            gap: 12px;
-            padding: 20px;
+            padding: 24px 20px;
+            gap: 20px;
           }
 
-          .navigation {
+          .choice-label {
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+          }
+
+          .choice-text {
+            font-size: 18px;
+          }
+
+          .navigation-buttons {
             flex-direction: column;
             gap: 16px;
           }
 
           .nav-button {
-            width: 100%;
-            max-width: 300px;
-          }
-
-          .nav-center {
-            order: -1;
+            font-size: 18px;
+            padding: 18px 24px;
           }
         }
 
-        /* Animation for reduced motion */
+        /* Accessibility Support */
         @media (prefers-reduced-motion: reduce) {
           .choice-button,
           .nav-button,
-          .progress-fill {
-            transition: none;
+          .progress-fill,
+          .question-category::before,
+          .progress-fill::after {
             animation: none;
-          }
-          
-          .choice-button:hover {
-            transform: none;
+            transition: none;
           }
         }
 
-        /* High contrast mode */
+        /* High Contrast Mode */
         @media (prefers-contrast: high) {
-          .choice-button,
-          .nav-button {
+          .choice-button {
             border-width: 3px;
+          }
+          
+          .choice-button.selected {
+            border-width: 4px;
+          }
+          
+          .progress-header,
+          .question-card {
+            border-width: 2px;
+          }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+          .progress-header,
+          .question-card {
+            background: rgba(17, 24, 39, 0.95);
+            border-color: rgba(75, 85, 99, 0.3);
+          }
+          
+          .choice-button {
+            background: rgba(31, 41, 55, 0.9);
+            border-color: rgba(75, 85, 99, 0.5);
+          }
+          
+          .choice-text {
+            color: #E5E7EB;
+          }
+          
+          .progress-text {
+            color: #E5E7EB;
           }
         }
       `}</style>

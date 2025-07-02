@@ -1,539 +1,524 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { useLanguage } from '../../../contexts/LanguageContext';
 import { useState, useEffect } from 'react';
-import LanguageSelector from '../../../components/LanguageSelector';
 
 export default function ResultPage() {
   const params = useParams();
   const router = useRouter();
-  const resultId = params.id?.toString().toUpperCase();
-  const { t, language } = useLanguage();
-  const [activeTab, setActiveTab] = useState('overview');
-  const [showShareDialog, setShowShareDialog] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [resultData, setResultData] = useState(null);
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showCopySuccess, setShowCopySuccess] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    
+    // Load result data from localStorage
+    const resultId = params.id;
+    if (resultId && typeof window !== 'undefined') {
+      const storedData = localStorage.getItem(`mbti-result-${resultId}`);
+      if (storedData) {
+        setResultData(JSON.parse(storedData));
+      }
+    }
+  }, [params.id]);
 
-  // Complete 16 MBTI Types with detailed analysis
-  const mbtiTypes = {
+  // Complete 16 MBTI types data with English translations
+  // MBTI Compatibility Information
+  const mbtiCompatibility = {
     'INTJ': {
-      type: 'INTJ',
-      title: '시니어 전략적 설계자',
-      subtitle: '미래를 내다보는 지혜로운 전략가',
-      emoji: '🔮',
-      color: '#6366f1',
-      bgGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      description: '오랜 경험으로 쌓인 지혜를 바탕으로 체계적이고 논리적인 사고를 하시며, 미래를 내다보는 통찰력을 가지고 계십니다.',
-      strengths: ['뛰어난 전략적 사고', '독립적 판단력', '체계적 계획 수립', '깊이 있는 통찰력', '목표 지향적 실행력'],
-      challenges: ['완벽주의 성향', '감정 표현의 어려움', '비판적 시각', '변화에 대한 저항'],
-      careers: ['컨설턴트', '연구원', '기획자', '작가', '투자 전문가'],
-      relationships: '신뢰할 수 있는 소수의 깊은 관계를 선호하며, 지적 교감을 중요하게 생각합니다.',
-      scores: { E: 15, I: 85, S: 25, N: 75, T: 80, F: 20, J: 85, P: 15 }
+      bestMatch: ['ENFP', 'ENTP', 'INFJ'],
+      goodMatch: ['INTJ', 'INFP', 'ENTJ'],
+      challengingMatch: ['ESFJ', 'ISFJ', 'ESTJ']
     },
     'INTP': {
-      type: 'INTP',
-      title: '시니어 사색하는 학자',
-      subtitle: '호기심 많은 지식 탐구자',
-      emoji: '🤔',
-      color: '#8b5cf6',
-      bgGradient: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
-      description: '평생에 걸친 학습과 탐구를 통해 깊이 있는 지식을 쌓아오셨으며, 새로운 아이디어를 탐구하는 것을 즐기십니다.',
-      strengths: ['뛰어난 분석력', '창의적 사고', '논리적 추론', '지적 호기심', '객관적 판단'],
-      challenges: ['현실적 적용의 어려움', '감정적 소통 부족', '우유부단함', '세부사항 놓침'],
-      careers: ['연구원', '교수', '분석가', '철학자', '발명가'],
-      relationships: '지적 대화를 나눌 수 있는 상대를 선호하며, 개인 공간을 중요하게 생각합니다.',
-      scores: { E: 20, I: 80, S: 30, N: 70, T: 75, F: 25, J: 35, P: 65 }
+      bestMatch: ['ENFJ', 'ENTJ', 'INFJ'],
+      goodMatch: ['INTP', 'ENTP', 'INTJ'],
+      challengingMatch: ['ESFJ', 'ISFJ', 'ESTJ']
     },
     'ENTJ': {
-      type: 'ENTJ',
-      title: '시니어 비전 리더',
-      subtitle: '목표를 실현하는 카리스마 리더',
-      emoji: '👑',
-      color: '#ef4444',
-      bgGradient: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)',
-      description: '풍부한 경험을 바탕으로 조직을 이끌고 목표를 달성하는 탁월한 리더십을 발휘하시는 분입니다.',
-      strengths: ['강력한 리더십', '전략적 비전', '목표 달성력', '결단력', '조직 관리 능력'],
-      challenges: ['권위적 성향', '감정적 배려 부족', '성급함', '비판에 민감'],
-      careers: ['CEO', '임원', '정치인', '사업가', '프로젝트 매니저'],
-      relationships: '효율적이고 목적 지향적인 관계를 선호하며, 상대방의 성장을 도모합니다.',
-      scores: { E: 85, I: 15, S: 35, N: 65, T: 80, F: 20, J: 90, P: 10 }
+      bestMatch: ['INFP', 'INTP', 'ENFP'],
+      goodMatch: ['ENTJ', 'INTJ', 'ENTP'],
+      challengingMatch: ['ISFP', 'INFP', 'ESFP']
     },
     'ENTP': {
-      type: 'ENTP',
-      title: '시니어 창의적 혁신가',
-      subtitle: '아이디어가 풍부한 변화의 선도자',
-      emoji: '💡',
-      color: '#10b981',
-      bgGradient: 'linear-gradient(135deg, #34d399 0%, #059669 100%)',
-      description: '새로운 가능성을 탐구하고 혁신적인 아이디어로 변화를 이끌어가는 창의적인 분입니다.',
-      strengths: ['창의적 아이디어', '뛰어난 적응력', '열정적 추진력', '설득력', '변화 수용'],
-      challenges: ['지속성 부족', '세부사항 소홀', '루틴 업무 회피', '감정적 민감성'],
-      careers: ['기업가', '컨설턴트', '마케터', '발명가', '언론인'],
-      relationships: '다양한 사람들과의 활발한 교류를 즐기며, 지적 자극을 주고받는 관계를 선호합니다.',
-      scores: { E: 80, I: 20, S: 25, N: 75, T: 70, F: 30, J: 25, P: 75 }
+      bestMatch: ['INFJ', 'INTJ', 'ENFJ'],
+      goodMatch: ['ENTP', 'ENFP', 'ENTJ'],
+      challengingMatch: ['ISTJ', 'ISFJ', 'ESTJ']
     },
     'INFJ': {
-      type: 'INFJ',
-      title: '시니어 영감을 주는 조언자',
-      subtitle: '깊은 통찰력을 가진 현명한 멘토',
-      emoji: '🌟',
-      color: '#3b82f6',
-      bgGradient: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)',
-      description: '깊은 성찰과 직관을 통해 사람들에게 영감과 조언을 주시는 따뜻하고 지혜로운 분입니다.',
-      strengths: ['깊은 통찰력', '공감 능력', '이상주의적 비전', '창의성', '헌신적 봉사'],
-      challenges: ['완벽주의', '과도한 감정이입', '비현실적 기대', '갈등 회피'],
-      careers: ['상담사', '작가', '교육자', '종교인', '사회복지사'],
-      relationships: '깊고 의미 있는 관계를 추구하며, 상대방의 성장과 행복을 진심으로 바랍니다.',
-      scores: { E: 25, I: 75, S: 20, N: 80, T: 30, F: 70, J: 75, P: 25 }
+      bestMatch: ['ENTP', 'ENFP', 'INTJ'],
+      goodMatch: ['INFJ', 'INFP', 'ENFJ'],
+      challengingMatch: ['ESTP', 'ESFP', 'ISTP']
     },
     'INFP': {
-      type: 'INFP',
-      title: '시니어 따뜻한 이상주의자',
-      subtitle: '진정성을 추구하는 마음 따뜻한 분',
-      emoji: '🦋',
-      color: '#8b5cf6',
-      bgGradient: 'linear-gradient(135deg, #c084fc 0%, #8b5cf6 100%)',
-      description: '진정한 가치와 의미를 추구하며, 따뜻한 마음으로 세상을 보시는 이상주의적인 분입니다.',
-      strengths: ['강한 가치관', '창의적 표현', '공감 능력', '진정성', '개인의 성장 지원'],
-      challenges: ['현실적 제약 무시', '갈등 회피', '우유부단함', '자기비판'],
-      careers: ['예술가', '작가', '상담사', '교사', '사회운동가'],
-      relationships: '진실하고 깊은 관계를 중시하며, 상대방의 개성과 가치를 존중합니다.',
-      scores: { E: 20, I: 80, S: 25, N: 75, T: 25, F: 75, J: 40, P: 60 }
+      bestMatch: ['ENFJ', 'ENTJ', 'ENFP'],
+      goodMatch: ['INFP', 'INFJ', 'ISFP'],
+      challengingMatch: ['ESTJ', 'ENTJ', 'ESTP']
     },
     'ENFJ': {
-      type: 'ENFJ',
-      title: '시니어 따뜻한 멘토',
-      subtitle: '사람을 이끌어주는 카리스마 있는 조력자',
-      emoji: '🤗',
-      color: '#059669',
-      bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      description: '풍부한 인생경험을 바탕으로 다른 사람들을 이끌어나가는 따뜻한 리더십을 가지고 계십니다.',
-      strengths: ['뛰어난 공감력', '영감을 주는 리더십', '소통 능력', '타인 성장 도모', '협력적 관계'],
-      challenges: ['자기희생적 성향', '비판에 민감', '완벽주의', '갈등에 대한 스트레스'],
-      careers: ['교육자', '상담사', '관리자', '종교인', '사회복지사'],
-      relationships: '사람들과의 깊은 유대감을 중시하며, 상대방의 잠재력을 끌어내는 것을 즐깁니다.',
-      scores: { E: 80, I: 20, S: 30, N: 70, T: 25, F: 75, J: 80, P: 20 }
+      bestMatch: ['INFP', 'ISFP', 'INTP'],
+      goodMatch: ['ENFJ', 'ENFP', 'INFJ'],
+      challengingMatch: ['ISTP', 'ESTP', 'ISTJ']
     },
     'ENFP': {
-      type: 'ENFP',
-      title: '시니어 열정적 격려자',
-      subtitle: '활력 넘치는 긍정의 에너지',
-      emoji: '🌈',
-      color: '#f59e0b',
-      bgGradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-      description: '밝고 열정적인 에너지로 주변 사람들에게 힘과 용기를 주시는 활기찬 분입니다.',
-      strengths: ['열정과 에너지', '창의적 아이디어', '사람들과의 친화력', '변화에 대한 개방성', '격려와 동기부여'],
-      challenges: ['집중력 부족', '현실성 결여', '감정 기복', '세부사항 소홀'],
-      careers: ['상담사', '교육자', '마케터', '연예인', '사회복지사'],
-      relationships: '다양한 사람들과의 활발한 교류를 즐기며, 상대방에게 영감과 격려를 제공합니다.',
-      scores: { E: 85, I: 15, S: 20, N: 80, T: 30, F: 70, J: 30, P: 70 }
+      bestMatch: ['INTJ', 'INFJ', 'ENFJ'],
+      goodMatch: ['ENFP', 'ENTP', 'INFP'],
+      challengingMatch: ['ISTJ', 'ESTJ', 'ISTP']
     },
     'ISTJ': {
-      type: 'ISTJ',
-      title: '시니어 신뢰할 수 있는 수호자',
-      subtitle: '책임감 있는 전통의 수호자',
-      emoji: '🛡️',
-      color: '#374151',
-      bgGradient: 'linear-gradient(135deg, #6b7280 0%, #374151 100%)',
-      description: '오랜 경험을 통해 쌓인 신뢰감과 책임감으로 주변을 든든하게 지켜주시는 분입니다.',
-      strengths: ['높은 책임감', '체계적 접근', '신뢰성', '전통 존중', '꾸준한 실행력'],
-      challenges: ['변화에 대한 저항', '융통성 부족', '감정 표현 어려움', '새로운 방식 거부'],
-      careers: ['공무원', '회계사', '법무사', '관리자', '전문 기술직'],
-      relationships: '안정적이고 신뢰할 수 있는 관계를 선호하며, 약속과 의무를 중시합니다.',
-      scores: { E: 20, I: 80, S: 85, N: 15, T: 70, F: 30, J: 90, P: 10 }
+      bestMatch: ['ESFP', 'ESTP', 'ISFP'],
+      goodMatch: ['ISTJ', 'ISFJ', 'ESTJ'],
+      challengingMatch: ['ENFP', 'ENTP', 'INFP']
     },
     'ISFJ': {
-      type: 'ISFJ',
-      title: '시니어 따뜻한 보호자',
-      subtitle: '배려 깊은 마음의 돌봄이',
-      emoji: '🤱',
-      color: '#10b981',
-      bgGradient: 'linear-gradient(135deg, #34d399 0%, #10b981 100%)',
-      description: '따뜻한 마음으로 주변 사람들을 돌보고 보호하시는 자애로운 분입니다.',
-      strengths: ['뛰어난 돌봄', '세심한 배려', '책임감', '협력적 태도', '전통적 가치 존중'],
-      challenges: ['자기주장 부족', '과도한 희생', '변화에 대한 불안', '갈등 회피'],
-      careers: ['간호사', '교사', '사회복지사', '상담사', '행정직'],
-      relationships: '상대방의 필요를 먼저 생각하며, 조화로운 관계 유지를 위해 노력합니다.',
-      scores: { E: 25, I: 75, S: 80, N: 20, T: 35, F: 65, J: 85, P: 15 }
+      bestMatch: ['ESFP', 'ESTP', 'ENFP'],
+      goodMatch: ['ISFJ', 'ISTJ', 'ESFJ'],
+      challengingMatch: ['ENTP', 'ENTJ', 'INTP']
     },
     'ESTJ': {
-      type: 'ESTJ',
-      title: '시니어 실용적 관리자',
-      subtitle: '체계적인 조직의 기둥',
-      emoji: '📋',
-      color: '#dc2626',
-      bgGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-      description: '체계적이고 실용적인 접근으로 조직과 가정을 효율적으로 관리하시는 분입니다.',
-      strengths: ['뛰어난 조직력', '실행력', '리더십', '체계적 사고', '현실적 판단'],
-      challenges: ['융통성 부족', '감정적 배려 부족', '권위적 성향', '변화에 대한 저항'],
-      careers: ['관리자', '임원', '공무원', '군인', '사업가'],
-      relationships: '명확한 역할과 책임을 기반으로 한 안정적인 관계를 선호합니다.',
-      scores: { E: 80, I: 20, S: 85, N: 15, T: 75, F: 25, J: 90, P: 10 }
+      bestMatch: ['ISFP', 'INFP', 'ISTP'],
+      goodMatch: ['ESTJ', 'ISTJ', 'ESFJ'],
+      challengingMatch: ['INFP', 'ENFP', 'INTP']
     },
     'ESFJ': {
-      type: 'ESFJ',
-      title: '시니어 사교적 후원자',
-      subtitle: '따뜻한 마음의 사회적 나눔이',
-      emoji: '🫶',
-      color: '#059669',
-      bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      description: '사람들과의 관계를 소중히 여기며, 따뜻한 마음으로 주변을 돌보시는 사교적인 분입니다.',
-      strengths: ['뛰어난 사교성', '배려심', '협력적 태도', '전통 존중', '실용적 도움'],
-      challenges: ['비판에 민감', '갈등 회피', '자기주장 부족', '변화에 대한 불안'],
-      careers: ['교사', '간호사', '상담사', '판매직', '서비스업'],
-      relationships: '화목하고 조화로운 관계를 추구하며, 상대방의 행복을 위해 노력합니다.',
-      scores: { E: 85, I: 15, S: 80, N: 20, T: 30, F: 70, J: 80, P: 20 }
+      bestMatch: ['ISFP', 'INFP', 'ISTP'],
+      goodMatch: ['ESFJ', 'ISFJ', 'ESTJ'],
+      challengingMatch: ['INTP', 'INTJ', 'ENTP']
     },
     'ISTP': {
-      type: 'ISTP',
-      title: '시니어 침착한 해결사',
-      subtitle: '실용적 문제 해결의 달인',
-      emoji: '🔧',
-      color: '#6b7280',
-      bgGradient: 'linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)',
-      description: '침착하고 실용적인 접근으로 문제를 해결하시는 능력 있는 분입니다.',
-      strengths: ['실용적 문제해결', '침착함', '적응력', '독립성', '분석적 사고'],
-      challenges: ['감정 표현 어려움', '장기 계획 부족', '사회적 관계 소홀', '변화 추구'],
-      careers: ['기술자', '장인', '수리공', '엔지니어', '운동선수'],
-      relationships: '실질적이고 자유로운 관계를 선호하며, 개인의 독립성을 중시합니다.',
-      scores: { E: 25, I: 75, S: 80, N: 20, T: 75, F: 25, J: 35, P: 65 }
+      bestMatch: ['ESFJ', 'ESTJ', 'ENFJ'],
+      goodMatch: ['ISTP', 'ESTP', 'ISFP'],
+      challengingMatch: ['ENFJ', 'INFJ', 'ENFP']
     },
     'ISFP': {
-      type: 'ISFP',
-      title: '시니어 온화한 예술가',
-      subtitle: '조용한 아름다움을 추구하는 분',
-      emoji: '🎨',
-      color: '#8b5cf6',
-      bgGradient: 'linear-gradient(135deg, #c084fc 0%, #8b5cf6 100%)',
-      description: '조용하고 온화한 성품으로 아름다움과 조화를 추구하시는 예술적 감성의 분입니다.',
-      strengths: ['예술적 감성', '공감 능력', '유연성', '개인적 가치 중시', '평화 추구'],
-      challenges: ['자기주장 부족', '갈등 회피', '현실성 부족', '스트레스 취약'],
-      careers: ['예술가', '디자이너', '상담사', '간호사', '교사'],
-      relationships: '진실하고 평화로운 관계를 원하며, 상대방의 개성을 존중합니다.',
-      scores: { E: 20, I: 80, S: 70, N: 30, T: 25, F: 75, J: 40, P: 60 }
+      bestMatch: ['ENFJ', 'ESFJ', 'ESTJ'],
+      goodMatch: ['ISFP', 'INFP', 'ESFP'],
+      challengingMatch: ['ENTJ', 'ESTJ', 'ENTP']
     },
     'ESTP': {
-      type: 'ESTP',
-      title: '시니어 활동적 모험가',
-      subtitle: '활력 넘치는 현재를 즐기는 분',
-      emoji: '🏃',
-      color: '#f59e0b',
-      bgGradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
-      description: '활동적이고 에너지 넘치는 성격으로 현재를 적극적으로 즐기시는 분입니다.',
-      strengths: ['활동력', '적응력', '사교성', '현실적 감각', '문제해결 능력'],
-      challenges: ['장기 계획 부족', '충동적 행동', '세부사항 소홀', '인내심 부족'],
-      careers: ['영업직', '운동선수', '연예인', '응급구조사', '요리사'],
-      relationships: '활발하고 즐거운 관계를 선호하며, 함께 활동을 즐기는 것을 좋아합니다.',
-      scores: { E: 90, I: 10, S: 85, N: 15, T: 65, F: 35, J: 25, P: 75 }
+      bestMatch: ['ISFJ', 'ISTJ', 'INFJ'],
+      goodMatch: ['ESTP', 'ESFP', 'ISTP'],
+      challengingMatch: ['INFJ', 'INTJ', 'INFP']
     },
     'ESFP': {
-      type: 'ESFP',
-      title: '시니어 자유로운 연예인',
-      subtitle: '즐거움을 나누는 밝은 에너지',
-      emoji: '🎭',
-      color: '#ec4899',
-      bgGradient: 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)',
-      description: '밝고 자유로운 성격으로 주변에 즐거움과 활력을 주시는 분입니다.',
-      strengths: ['밝은 에너지', '사교성', '유연성', '공감 능력', '즉흥성'],
-      challenges: ['집중력 부족', '계획성 부족', '비판에 민감', '스트레스 취약'],
-      careers: ['연예인', '교사', '상담사', '이벤트 기획자', '서비스업'],
-      relationships: '즐겁고 따뜻한 관계를 추구하며, 상대방에게 기쁨을 주는 것을 좋아합니다.',
-      scores: { E: 85, I: 15, S: 75, N: 25, T: 30, F: 70, J: 30, P: 70 }
+      bestMatch: ['ISFJ', 'ISTJ', 'INFJ'],
+      goodMatch: ['ESFP', 'ENFP', 'ISFP'],
+      challengingMatch: ['INTJ', 'INTP', 'ENTJ']
     }
   };
 
-  const currentType = mbtiTypes[resultId] || mbtiTypes['ENFJ'];
-
-  // Tab content data
-  const tabs = [
-    { id: 'overview', label: '성격 개요', icon: '📊' },
-    { id: 'strengths', label: '강점 분석', icon: '💪' },
-    { id: 'careers', label: '적합 분야', icon: '💼' },
-    { id: 'relationships', label: '인간관계', icon: '👥' }
-  ];
-
-  const handleRetakeTest = () => {
-    router.push('/survey');
-  };
-
-  const handleGoHome = () => {
-    router.push('/');
-  };
-
-  const handleShare = () => {
-    setShowShareDialog(true);
+  const mbtiTypes = {
+    'INTJ': {
+      type: 'INTJ',
+      title: 'Senior Strategic Architect',
+      subtitle: 'Wise Strategist with Future Vision',
+      description: 'Based on wisdom accumulated through long experience, you engage in systematic and logical thinking with insightful foresight into the future.',
+      strengths: ['Excellent strategic thinking', 'Independent judgment', 'Systematic planning', 'Deep insight', 'Goal-oriented execution'],
+      challenges: ['Perfectionist tendencies', 'Difficulty expressing emotions', 'Critical perspective', 'Resistance to change'],
+      careers: ['Consultant', 'Researcher', 'Planner', 'Writer', 'Investment Expert'],
+      relationships: 'You prefer deep relationships with a trustworthy few and value intellectual connection.',
+      emoji: '🔮',
+      color: '#6366f1',
+      bgGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      seniorTips: ['Engage in regular intellectual activities to maintain brain health', 'Practice strategic financial planning and investment for a secure retirement', 'Build networks with trusted professionals and experts'],
+      healthTips: ['Maintain cognitive function through regular reading and learning', 'Practice stress management through meditation or yoga', 'Focus on preventive healthcare with regular check-ups']
+    },
+    'INTP': {
+      type: 'INTP', 
+      title: 'Senior Contemplative Scholar',
+      subtitle: 'Curious Knowledge Seeker',
+      description: 'Through lifelong learning and exploration, you have built deep knowledge and enjoy exploring new ideas.',
+      strengths: ['Excellent analytical skills', 'Creative thinking', 'Logical reasoning', 'Intellectual curiosity', 'Objective judgment'],
+      challenges: ['Difficulty in practical application', 'Lack of emotional communication', 'Indecisiveness', 'Missing details'],
+      careers: ['Researcher', 'Professor', 'Analyst', 'Philosopher', 'Inventor'],
+      relationships: 'You prefer partners with whom you can have intellectual conversations and value personal space.',
+      emoji: '🤔',
+      color: '#8b5cf6',
+      bgGradient: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
+      seniorTips: ['Continue learning new subjects to satisfy intellectual curiosity', 'Participate in online courses or seminars to stay updated', 'Consider volunteering using your research and analytical skills'],
+      healthTips: ['Enjoy brain exercises like puzzles or chess for mental stimulation', 'Take sufficient alone time to recharge your mental energy', 'Prevent depression by engaging in research on topics of interest']
+    },
+    'ENTJ': {
+      type: 'ENTJ',
+      title: 'Senior Leader',
+      subtitle: 'Experienced Leadership Role Model',
+      description: 'With leadership built through long experience, you guide those around you and act systematically to achieve clear goals.',
+      strengths: ['Strong leadership', 'Strategic thinking', 'Decisiveness', 'Organizational management', 'Efficient execution'],
+      challenges: ['Stubbornness', 'Lack of emotional consideration', 'Authoritative tendencies', 'Missing details'],
+      careers: ['Executive', 'Project Manager', 'Instructor', 'Counselor', 'Organization Leader'],
+      relationships: 'You pursue goal-oriented relationships that foster mutual growth and prefer honest communication.',
+      emoji: '👑',
+      color: '#dc2626',
+      bgGradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+      seniorTips: ['Use your experience to mentor younger generations', 'Take leadership roles in community organizations or volunteer groups', 'Share your lifetime knowledge through writing or speaking'],
+      healthTips: ['Maintain physical fitness and energy through regular exercise', 'Balance work and rest with appropriate leisure activities', 'Stay mentally active through regular social activities']
+    },
+    'ENTP': {
+      type: 'ENTP',
+      title: 'Senior Innovator',
+      subtitle: 'Source of Creative Ideas',
+      description: 'Based on rich experience, you constantly create new ideas and gain vitality through change and innovation.',
+      strengths: ['Creative ideation', 'Adaptability', 'Persuasiveness', 'Challenging spirit', 'Broad interests'],
+      challenges: ['Lack of focus', 'Inconsistency', 'Neglecting details', 'Lack of realism'],
+      careers: ['Entrepreneur', 'Inventor', 'Speaker', 'Planner', 'Cultural Arts Activist'],
+      relationships: 'You enjoy interacting with diverse people who provide intellectual stimulation and like sharing new ideas.',
+      emoji: '💡',
+      color: '#f59e0b',
+      bgGradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)',
+      seniorTips: ['Learn new technologies or trends to adapt to changing times', 'Develop creative projects or entrepreneurial ideas', 'Engage with diverse generations to gain new perspectives'],
+      healthTips: ['Manage stress by flexibly adapting to changing environments', 'Stay energized with new activities and travel experiences', 'Keep your brain active through creative activities']
+    },
+    'INFJ': {
+      type: 'INFJ',
+      title: 'Senior Sage',
+      subtitle: 'Advisor with Deep Insight',
+      description: 'With deep insight built through lifelong experience, you are dedicated to understanding and helping others while pursuing meaningful values.',
+      strengths: ['Deep insight', 'Empathy', 'Idealism', 'Dedicated attitude', 'Creative thinking'],
+      challenges: ['Excessive perfectionism', 'Burnout risk', 'Conflict avoidance', 'Lack of realism'],
+      careers: ['Counselor', 'Educator', 'Writer', 'Social Worker', 'Artist'],
+      relationships: 'You pursue genuine deep relationships and sincerely wish for the growth and happiness of others.',
+      emoji: '🌟',
+      color: '#10b981',
+      bgGradient: 'linear-gradient(135deg, #34d399 0%, #10b981 100%)',
+      seniorTips: ['Start counseling or coaching activities based on life experience', 'Participate in meaningful social service or charitable activities', 'Write an autobiography or memoir to organize the meaning of life'],
+      healthTips: ['Find inner peace through meditation or spiritual activities', 'Set appropriate boundaries to prevent emotional exhaustion', 'Find mental stability through time with nature']
+    },
+    'INFP': {
+      type: 'INFP',
+      title: 'Senior Mediator',
+      subtitle: 'Warm-hearted Peacemaker',
+      description: 'With deep understanding of humanity built over a lifetime, you create harmonious environments and cherish personal values and beliefs.',
+      strengths: ['High empathy', 'Creativity', 'Pursuing personal values', 'Adaptability', 'Seeking harmony'],
+      challenges: ['Excessive idealism', 'Conflict avoidance', 'Indecisiveness', 'Reality escape'],
+      careers: ['Writer', 'Artist', 'Counselor', 'Educator', 'Social Worker'],
+      relationships: 'You value authentic and meaningful relationships and respect the individuality and values of others.',
+      emoji: '🕊️',
+      color: '#06b6d4',
+      bgGradient: 'linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%)',
+      seniorTips: ['Create your own artistic world through art or creative activities', 'Find ways to live harmoniously while maintaining personal values and beliefs', 'Take sufficient rest and reflection time in quiet environments'],
+      healthTips: ['Create a peaceful environment as you are sensitive to stress', 'Find emotional stability through creative activities or journaling', 'Avoid conflict situations and maintain stable relationships']
+    },
+    'ENFJ': {
+      type: 'ENFJ',
+      title: 'Senior Teacher',
+      subtitle: 'Warm-hearted Life Mentor',
+      description: 'Based on rich life experience, you help others grow and dedicate yourself to community harmony and development.',
+      strengths: ['Excellent communication skills', 'Interest in others', 'Leadership', 'Empathy', 'Motivation'],
+      challenges: ['Self-sacrificing tendencies', 'Sensitivity to criticism', 'Excessive involvement', 'Difficulty setting boundaries'],
+      careers: ['Educator', 'Counselor', 'Social Worker', 'Instructor', 'Religious Leader'],
+      relationships: 'You find joy in bringing out others\' potential and helping them grow, creating warm and supportive relationships.',
+      emoji: '🌻',
+      color: '#f97316',
+      bgGradient: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+      seniorTips: ['Use your experience to train successors or operate educational programs', 'Participate in activities or committees for community development', 'Engage in volunteer work to help marginalized neighbors'],
+      healthTips: ['Be careful not to overextend yourself in helping others', 'Secure your own time and space for recharging', 'Maintain energy through regular exercise and social activities']
+    },
+    'ENFP': {
+      type: 'ENFP',
+      title: 'Senior Activist',
+      subtitle: 'Passionate Life Supporter',
+      description: 'With overflowing passion and positive energy, you inspire those around you and excel at discovering and realizing new possibilities.',
+      strengths: ['Excellent communication', 'Creative problem-solving', 'Passion and energy', 'Motivating others', 'Adaptability'],
+      challenges: ['Lack of focus', 'Inconsistency', 'Excessive optimism', 'Difficulty handling details'],
+      careers: ['Speaker', 'Cultural Planner', 'Counselor', 'Educator', 'Artist'],
+      relationships: 'You prefer vibrant relationships where you share energy with diverse people and inspire each other.',
+      emoji: '🎪',
+      color: '#ec4899',
+      bgGradient: 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)',
+      seniorTips: ['Gain energy through meetings and interactions with diverse people', 'Start new hobbies or activities for continuous stimulation', 'Play a role in inspiring others with positive energy'],
+      healthTips: ['Prevent loneliness and depression through active social activities', 'Maintain health and release energy through various physical activities', 'Keep your brain active with new experiences and challenges']
+    },
+    'ISTJ': {
+      type: 'ISTJ',
+      title: 'Senior Guardian',
+      subtitle: 'Reliable Keeper of Tradition',
+      description: 'With lifelong sincerity and responsibility, you serve as a reliable support for those around you and pursue a stable and systematic life.',
+      strengths: ['High responsibility', 'Systematic approach', 'Reliability', 'Attention to detail', 'Patience'],
+      challenges: ['Resistance to change', 'Lack of flexibility', 'Difficulty expressing emotions', 'Difficulty accepting new ideas'],
+      careers: ['Manager', 'Accountant', 'Civil Servant', 'Educator', 'Technical Specialist'],
+      relationships: 'You value long-term, deep relationships based on trust and stability, and consider keeping promises important.',
+      emoji: '🏛️',
+      color: '#374151',
+      bgGradient: 'linear-gradient(135deg, #6b7280 0%, #374151 100%)',
+      seniorTips: ['Pass on professional knowledge accumulated through long experience to successors', 'Maintain stable and systematic daily routines', 'Play a role in preserving and transmitting traditional values and wisdom'],
+      healthTips: ['Stabilize your body rhythm with regular lifestyle patterns', 'Adapt to new environments through gradual changes', 'Focus on preventive healthcare with regular health check-ups']
+    },
+    'ISFJ': {
+      type: 'ISFJ',
+      title: 'Senior Protector',
+      subtitle: 'Warm-hearted Caregiver',
+      description: 'With lifelong dedication and service, you care for family and community, having a warm heart that thinks of others\' needs first.',
+      strengths: ['Excellent caregiving ability', 'Thoughtful consideration', 'Responsibility', 'Cooperative attitude', 'Respect for tradition'],
+      challenges: ['Lack of self-assertion', 'Excessive self-sacrifice', 'Difficulty adapting to change', 'Conflict avoidance'],
+      careers: ['Caregiver', 'Social Worker', 'Educator', 'Counselor', 'Religious Leader'],
+      relationships: 'You find joy in carefully considering and supporting others, seeking stable and trustworthy relationships.',
+      emoji: '🤱',
+      color: '#059669',
+      bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+      seniorTips: ['Find fulfillment in caregiving activities for family and community', 'Pass on traditional cooking or handicraft skills to younger generations', 'Maintain stable daily life in quiet and peaceful environments'],
+      healthTips: ['Avoid excessive self-sacrifice and take care of your own health too', 'Take sufficient rest to reduce stress', 'Find emotional stability through emotional bonds with close people']
+    },
+    'ESTJ': {
+      type: 'ESTJ',
+      title: 'Senior Manager',
+      subtitle: 'Experienced Organizational Pillar',
+      description: 'With organizational management skills built through long experience, you create and manage efficient systems with a practical and realistic approach.',
+      strengths: ['Excellent organizational skills', 'Practical thinking', 'Leadership', 'Decisiveness', 'Responsibility'],
+      challenges: ['Stubbornness', 'Lack of emotional consideration', 'Resistance to change', 'Obsession with details'],
+      careers: ['Manager', 'Business Owner', 'Civil Servant', 'Educational Administrator', 'Organization Leader'],
+      relationships: 'You prefer systematic relationships based on clear roles and responsibilities, valuing mutual respect and trust.',
+      emoji: '📊',
+      color: '#b91c1c',
+      bgGradient: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)',
+      seniorTips: ['Use organizational management experience to serve as an advisor to groups or organizations', 'Consider consulting activities that create efficient systems and procedures', 'Contribute to the community with practical problem-solving abilities'],
+      healthTips: ['Avoid excessive stress and balance work and rest', 'Manage both physical and mental health through regular exercise', 'Reduce psychological burden by moderating perfectionist tendencies']
+    },
+    'ESFJ': {
+      type: 'ESFJ',
+      title: 'Senior Collaborator',
+      subtitle: 'Warm Heart of the Community',
+      description: 'With rich interpersonal experience, you promote community harmony and thoughtfully care for everyone\'s comfort and happiness.',
+      strengths: ['Excellent interpersonal relationships', 'Cooperative attitude', 'Responsibility', 'Practical help', 'Seeking harmony'],
+      challenges: ['Sensitivity to criticism', 'Conflict stress', 'Lack of self-assertion', 'Difficulty adapting to change'],
+      careers: ['Educator', 'Counselor', 'Social Worker', 'Event Planner', 'Service Industry'],
+      relationships: 'You value creating warm and harmonious relationships where everyone is included and cherished.',
+      emoji: '🤗',
+      color: '#d97706',
+      bgGradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+      seniorTips: ['Plan gatherings or events using your ability to bring people together and create harmony', 'Play a bridging role in helping communication between generations', 'Maintain networks based on warm relationships'],
+      healthTips: ['Set appropriate boundaries to avoid excessive stress', 'Gain mental satisfaction through positive social activities', 'Pursue peaceful environments away from conflict situations']
+    },
+    'ISTP': {
+      type: 'ISTP',
+      title: 'Senior Craftsman',
+      subtitle: 'Owner of Practical Wisdom',
+      description: 'With practical problem-solving abilities gained through lifelong hands-on experience, you enjoy making and fixing things with your hands.',
+      strengths: ['Excellent problem-solving', 'Practical thinking', 'Manual skills', 'Independence', 'Composure'],
+      challenges: ['Difficulty expressing emotions', 'Lack of long-term planning', 'Teamwork difficulties', 'Boredom with routine tasks'],
+      careers: ['Technician', 'Repair Specialist', 'Craftsperson', 'Farmer', 'Machine Operator'],
+      relationships: 'You express care through practical help and prefer comfortable relationships that respect others\' independence.',
+      emoji: '🔧',
+      color: '#7c2d12',
+      bgGradient: 'linear-gradient(135deg, #a3a3a3 0%, #525252 100%)',
+      seniorTips: ['Gain a sense of achievement through crafts or repair activities using your manual skills', 'Pass on practical skills or know-how to younger generations', 'Maintain an independent and free lifestyle'],
+      healthTips: ['Take sufficient alone time to recharge your mental energy', 'Promote brain activation through hands-on activities', 'Maintain health through regular physical activity, but not excessively']
+    },
+    'ISFP': {
+      type: 'ISFP',
+      title: 'Senior Artist',
+      subtitle: 'Creator of Quiet Beauty',
+      description: 'With lifelong aesthetic sense and delicate sensitivity, you create beauty and pursue personal values and harmonious living.',
+      strengths: ['Artistic sense', 'Empathy', 'Flexibility', 'Pursuing personal values', 'Keen observation'],
+      challenges: ['Lack of self-assertion', 'Conflict avoidance', 'Difficulty solving practical problems', 'Sensitivity to stress'],
+      careers: ['Artist', 'Designer', 'Musician', 'Writer', 'Therapist'],
+      relationships: 'You value genuine and deep emotional connections, thoughtfully considering others\' individuality and emotions.',
+      emoji: '🎨',
+      color: '#7c3aed',
+      bgGradient: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)',
+      seniorTips: ['Pursue beauty through artistic creation or cultural activities', 'Live life that maintains personal values and beliefs while respecting others', 'Take sufficient rest in quiet and peaceful environments'],
+      healthTips: ['Create a calm environment as you are sensitive to stress', 'Find emotional stability through creative activities or art appreciation', 'Spend time close to nature to gain peace of mind']
+    },
+    'ESTP': {
+      type: 'ESTP',
+      title: 'Senior Adventurer',
+      subtitle: 'Active Life Enjoyer',
+      description: 'Based on rich life experience, you enjoy the present moment and solve problems with a practical and flexible approach.',
+      strengths: ['Excellent adaptability', 'Practical problem-solving', 'Sociability', 'Realistic sense', 'Action-oriented'],
+      challenges: ['Lack of planning', 'Impulsive behavior', 'Lack of long-term perspective', 'Missing details'],
+      careers: ['Sales', 'Service Industry', 'Sports Coach', 'Event Planner', 'Emergency Responder'],
+      relationships: 'You enjoy sharing active and fun experiences together and prefer natural and comfortable relationships.',
+      emoji: '🏃',
+      color: '#dc2626',
+      bgGradient: 'linear-gradient(135deg, #f87171 0%, #dc2626 100%)',
+      seniorTips: ['Maintain an active lifestyle and enjoy new experiences', 'Help people around you with practical problem-solving abilities', 'Enjoy the present moment and maintain a positive mindset'],
+      healthTips: ['Maintain physical fitness and vitality through regular physical activities', 'Make careful choices considering health rather than impulsive decisions', 'Prevent loneliness and gain energy through social activities']
+    },
+    'ESFP': {
+      type: 'ESFP',
+      title: 'Senior Entertainer',
+      subtitle: 'Warm-hearted Mood Maker',
+      description: 'With overflowing energy and a warm heart, you bring joy to those around you, cherishing and enjoying the present moment.',
+      strengths: ['Excellent sociability', 'Positive energy', 'Empathy', 'Flexibility', 'Practical help'],
+      challenges: ['Lack of planning', 'Sensitivity to criticism', 'Conflict stress', 'Difficulty setting long-term goals'],
+      careers: ['Educator', 'Counselor', 'Entertainer', 'Event Planner', 'Service Industry'],
+      relationships: 'You find joy in seeing everyone happy and enjoying themselves, creating warm and vibrant relationships.',
+      emoji: '🌈',
+      color: '#f59e0b',
+      bgGradient: 'linear-gradient(135deg, #fde047 0%, #f59e0b 100%)',
+      seniorTips: ['Play a role in energizing people around you with positive energy', 'Receive continuous stimulation through meetings with diverse people', 'Enjoy the present moment and create many happy memories'],
+      healthTips: ['Prevent depression through active social activities', 'Maintain mental stimulation through various hobby activities', 'Avoid excessive stress and focus on enjoyable activities']
+    }
   };
 
   const copyResultLink = () => {
     if (mounted && typeof window !== 'undefined') {
       navigator.clipboard.writeText(window.location.href);
-      alert('결과 링크가 클립보드에 복사되었습니다!');
+      setShowCopySuccess(true);
+      setTimeout(() => {
+        setShowCopySuccess(false);
+        setShowShareDialog(false);
+      }, 2000);
     }
   };
 
-  // Radar chart component
-  const RadarChart = ({ scores }) => {
-    const dimensions = [
-      { key: 'E', label: '외향성', value: scores.E },
-      { key: 'S', label: '감각', value: scores.S },
-      { key: 'T', label: '사고', value: scores.T },
-      { key: 'J', label: '판단', value: scores.J }
-    ];
-
+  if (!mounted || !resultData) {
     return (
-      <div className="radar-chart">
-        <div className="chart-container">
-          {dimensions.map((dim, index) => (
-            <div key={dim.key} className={`dimension dimension-${index + 1}`}>
-              <div className="dimension-label">{dim.label}</div>
-              <div className="dimension-bar">
-                <div 
-                  className="dimension-fill"
-                  style={{ 
-                    width: `${dim.value}%`,
-                    background: currentType.color
-                  }}
-                />
-              </div>
-              <div className="dimension-value">{dim.value}%</div>
-            </div>
-          ))}
-        </div>
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading your results...</p>
+        
+        <style jsx>{`
+          .loading-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+          }
+          
+          .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
       </div>
     );
-  };
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'overview':
-        return (
-          <div className="tab-content">
-            <div className="personality-overview">
-              <div className="type-display">
-                <div className="type-emoji">{currentType.emoji}</div>
-                <div className="type-info">
-                  <h2 className="type-code">{currentType.type}</h2>
-                  <h3 className="type-title">{currentType.title}</h3>
-                  <p className="type-subtitle">{currentType.subtitle}</p>
-                </div>
-              </div>
-              
-              <div className="description-card">
-                <h4>성격 특성</h4>
-                <p>{currentType.description}</p>
-              </div>
-
-              <div className="scores-section">
-                <h4>성격 차원 분석</h4>
-                <RadarChart scores={currentType.scores} />
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'strengths':
-        return (
-          <div className="tab-content">
-            <div className="strengths-section">
-              <h4>💪 주요 강점</h4>
-              <div className="traits-grid">
-                {currentType.strengths.map((strength, index) => (
-                  <div key={index} className="trait-card strength-card">
-                    <div className="trait-icon">✨</div>
-                    <div className="trait-text">{strength}</div>
-                  </div>
-                ))}
-              </div>
-
-              <h4>⚠️ 주의할 점</h4>
-              <div className="traits-grid">
-                {currentType.challenges.map((challenge, index) => (
-                  <div key={index} className="trait-card challenge-card">
-                    <div className="trait-icon">💡</div>
-                    <div className="trait-text">{challenge}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'careers':
-        return (
-          <div className="tab-content">
-            <div className="careers-section">
-              <h4>💼 적합한 분야</h4>
-              <div className="careers-grid">
-                {currentType.careers.map((career, index) => (
-                  <div key={index} className="career-card">
-                    <div className="career-icon">🎯</div>
-                    <div className="career-text">{career}</div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="career-advice">
-                <h5>시니어를 위한 조언</h5>
-                <p>
-                  풍부한 경험과 {currentType.type} 성격의 강점을 살려, 
-                  멘토링이나 컨설팅 분야에서 젊은 세대에게 지혜를 전수하는 역할을 
-                  고려해보시기 바랍니다. 현재의 전문성을 바탕으로 새로운 도전도 
-                  충분히 가능합니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'relationships':
-        return (
-          <div className="tab-content">
-            <div className="relationships-section">
-              <h4>👥 인간관계 특성</h4>
-              <div className="relationship-card">
-                <div className="relationship-icon">💝</div>
-                <p>{currentType.relationships}</p>
-              </div>
-
-              <div className="relationship-tips">
-                <h5>관계 개선 팁</h5>
-                <div className="tips-list">
-                  <div className="tip-item">
-                    <span className="tip-icon">🌱</span>
-                    <span>상대방의 입장에서 생각해보기</span>
-                  </div>
-                  <div className="tip-item">
-                    <span className="tip-icon">💬</span>
-                    <span>열린 마음으로 대화하기</span>
-                  </div>
-                  <div className="tip-item">
-                    <span className="tip-icon">🤝</span>
-                    <span>서로의 차이점 인정하기</span>
-                  </div>
-                  <div className="tip-item">
-                    <span className="tip-icon">💌</span>
-                    <span>감사 표현을 자주하기</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  };
-
-  if (!mounted) {
-    return <div className="loading-screen">결과를 불러오는 중...</div>;
   }
+
+  const typeInfo = mbtiTypes[resultData.mbtiType] || mbtiTypes['INTJ'];
 
   return (
     <div className="result-container">
       {/* Hero Section */}
-      <section className="result-hero" style={{ background: currentType.bgGradient }}>
-        <div className="hero-background">
-          <div className="floating-particles">
-            <div className="particle particle-1"></div>
-            <div className="particle particle-2"></div>
-            <div className="particle particle-3"></div>
+      <div className="hero-section">
+        <div className="hero-content">
+          <div className="type-badge">
+            <span className="type-emoji">{typeInfo.emoji}</span>
+            <div className="type-info">
+              <h1 className="type-title">{typeInfo.type}</h1>
+              <p className="type-subtitle">{typeInfo.title}</p>
+            </div>
+          </div>
+          
+          <h2 className="hero-title">{typeInfo.subtitle}</h2>
+          <p className="hero-description">{typeInfo.description}</p>
+          
+          <div className="action-buttons">
+            <button 
+              className="share-button"
+              onClick={() => setShowShareDialog(true)}
+            >
+              <span>🔗</span> Share Results
+            </button>
+            <button 
+              className="home-button"
+              onClick={() => router.push('/')}
+            >
+              <span>🏠</span> Take Test Again
+            </button>
           </div>
         </div>
+      </div>
 
-        <div className="container">
-          {/* Language Selector */}
-          <div className="language-selector-wrapper">
-            <LanguageSelector />
-          </div>
-
-          {/* Hero Content */}
-          <div className="hero-content">
-            <div className="completion-badge">
-              <span className="badge-icon">🎉</span>
-              <span className="badge-text">테스트 완료!</span>
+      {/* Detailed Analysis Section */}
+      <div className="analysis-section">
+        <div className="analysis-grid">
+          {/* Strengths Card */}
+          <div className="analysis-card strengths-card">
+            <div className="card-header">
+              <h3>💪 Key Strengths</h3>
             </div>
-
-            <div className="type-showcase">
-              <div className="type-emoji-large">{currentType.emoji}</div>
-              <h1 className="type-title-main">{currentType.title}</h1>
-              <p className="type-subtitle-main">{currentType.subtitle}</p>
-              <div className="type-code-badge">{currentType.type}</div>
-            </div>
-
-            <div className="action-buttons">
-              <button onClick={handleShare} className="btn btn-share">
-                <span className="btn-icon">📤</span>
-                <span className="btn-text">결과 공유</span>
-              </button>
-              <button onClick={handleRetakeTest} className="btn btn-retake">
-                <span className="btn-icon">🔄</span>
-                <span className="btn-text">다시 테스트</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="result-main">
-        <div className="container">
-          {/* Tab Navigation */}
-          <div className="tab-navigation">
-            <div className="tab-list">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`tab-button ${activeTab === tab.id ? 'tab-active' : ''}`}
-                >
-                  <span className="tab-icon">{tab.icon}</span>
-                  <span className="tab-label">{tab.label}</span>
-                </button>
+            <div className="card-content">
+              {typeInfo.strengths.map((strength, index) => (
+                <div key={index} className="strength-item">
+                  <span className="bullet">✨</span>
+                  <span>{strength}</span>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Tab Content */}
-          <div className="tab-content-wrapper">
-            {renderTabContent()}
+          {/* Challenges Card */}
+          <div className="analysis-card challenges-card">
+            <div className="card-header">
+              <h3>🎯 Growth Points</h3>
+            </div>
+            <div className="card-content">
+              {typeInfo.challenges.map((challenge, index) => (
+                <div key={index} className="challenge-item">
+                  <span className="bullet">🔍</span>
+                  <span>{challenge}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Footer Actions */}
-          <div className="footer-actions">
-            <button onClick={handleGoHome} className="btn btn-home">
-              <span className="btn-icon">🏠</span>
-              <span className="btn-text">홈으로 돌아가기</span>
-            </button>
+          {/* Recommended Activities Card */}
+          <div className="analysis-card careers-card">
+            <div className="card-header">
+              <h3>🌟 Recommended Activities</h3>
+            </div>
+            <div className="card-content">
+              {typeInfo.careers.map((career, index) => (
+                <div key={index} className="career-item">
+                  <span className="bullet">🎨</span>
+                  <span>{career}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Relationships Card */}
+          <div className="analysis-card relationships-card">
+            <div className="card-header">
+              <h3>❤️ Relationships</h3>
+            </div>
+            <div className="card-content">
+              <p className="relationship-text">{typeInfo.relationships}</p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Share Dialog */}
+      {/* Share Modal */}
       {showShareDialog && (
-        <div className="share-overlay" onClick={() => setShowShareDialog(false)}>
-          <div className="share-dialog" onClick={(e) => e.stopPropagation()}>
-            <div className="share-header">
-              <h3>결과 공유하기</h3>
+        <div className="modal-overlay" onClick={() => setShowShareDialog(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Share Results</h3>
               <button 
                 className="close-button"
                 onClick={() => setShowShareDialog(false)}
               >
-                ✕
+                ×
               </button>
             </div>
-            <div className="share-content">
-              <button onClick={copyResultLink} className="share-option">
-                <span className="share-icon">🔗</span>
-                <span>링크 복사</span>
-              </button>
-              <div className="share-message">
-                <p>당신의 성격 유형을 가족, 친구들과 공유해보세요!</p>
-              </div>
+            
+            <div className="modal-body">
+              {showCopySuccess ? (
+                <div className="success-message">
+                  <span className="success-icon">✅</span>
+                  <p>Link has been copied to clipboard!</p>
+                </div>
+              ) : (
+                <button className="copy-button" onClick={copyResultLink}>
+                  <span>📋</span> Copy Link
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -542,650 +527,323 @@ export default function ResultPage() {
       <style jsx>{`
         .result-container {
           min-height: 100vh;
-          background: #f8fafc;
-        }
-
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .result-hero {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           position: relative;
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
-          color: white;
+          overflow-x: hidden;
         }
 
-        .hero-background {
+        .result-container::before {
+          content: '';
           position: absolute;
           inset: 0;
-          z-index: 0;
+          background: 
+            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(255, 120, 198, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%);
+          pointer-events: none;
         }
 
-        .floating-particles {
-          position: absolute;
-          inset: 0;
-        }
-
-        .particle {
-          position: absolute;
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          animation: float 8s ease-in-out infinite;
-        }
-
-        .particle-1 {
-          top: 20%;
-          right: 10%;
-          animation-delay: 0s;
-        }
-
-        .particle-2 {
-          bottom: 30%;
-          left: 15%;
-          width: 150px;
-          height: 150px;
-          animation-delay: 3s;
-        }
-
-        .particle-3 {
-          top: 50%;
-          right: 30%;
-          width: 100px;
-          height: 100px;
-          animation-delay: 6s;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          33% { transform: translateY(-30px) rotate(120deg); }
-          66% { transform: translateY(-15px) rotate(240deg); }
-        }
-
-        .language-selector-wrapper {
+        .hero-section {
           position: relative;
           z-index: 10;
-          display: flex;
-          justify-content: flex-end;
-          padding: 24px 0;
+          padding: 60px 20px 80px;
+          text-align: center;
         }
 
         .hero-content {
-          position: relative;
-          z-index: 10;
-          text-align: center;
           max-width: 800px;
           margin: 0 auto;
-          padding: 40px 0;
         }
 
-        .completion-badge {
+        .type-badge {
           display: inline-flex;
           align-items: center;
-          gap: 12px;
-          background: rgba(255, 255, 255, 0.2);
+          gap: 20px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
           border: 1px solid rgba(255, 255, 255, 0.3);
-          border-radius: 50px;
-          padding: 16px 32px;
+          border-radius: 30px;
+          padding: 24px 40px;
           margin-bottom: 40px;
-          backdrop-filter: blur(10px);
-          font-size: 18px;
-          font-weight: 600;
+          box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
-        .badge-icon {
-          font-size: 24px;
-        }
-
-        .type-showcase {
-          margin-bottom: 48px;
-        }
-
-        .type-emoji-large {
-          font-size: 120px;
-          margin-bottom: 24px;
+        .type-emoji {
+          font-size: 48px;
           filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
 
-        .type-title-main {
-          font-size: clamp(2.5rem, 6vw, 4rem);
-          font-weight: 800;
-          margin: 0 0 16px 0;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .type-info {
+          text-align: left;
         }
 
-        .type-subtitle-main {
-          font-size: clamp(1.25rem, 3vw, 1.75rem);
-          margin: 0 0 32px 0;
-          opacity: 0.9;
-          font-weight: 500;
+        .type-title {
+          font-size: 48px;
+          font-weight: 900;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin: 0;
+          letter-spacing: -1px;
         }
 
-        .type-code-badge {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.3);
-          border: 2px solid rgba(255, 255, 255, 0.5);
-          border-radius: 20px;
-          padding: 12px 32px;
-          font-size: 24px;
+        .type-subtitle {
+          font-size: 18px;
+          color: #6B7280;
+          margin: 8px 0 0 0;
+          font-weight: 600;
+        }
+
+        .hero-title {
+          font-size: 36px;
           font-weight: 800;
-          letter-spacing: 2px;
-          backdrop-filter: blur(10px);
+          color: white;
+          margin-bottom: 24px;
+          text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-description {
+          font-size: 20px;
+          color: rgba(255, 255, 255, 0.9);
+          line-height: 1.6;
+          margin-bottom: 48px;
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .action-buttons {
           display: flex;
-          gap: 24px;
+          gap: 20px;
           justify-content: center;
           flex-wrap: wrap;
         }
 
-        .btn {
+        .share-button, .home-button {
           display: flex;
           align-items: center;
           gap: 12px;
-          background: rgba(255, 255, 255, 0.2);
-          border: 2px solid rgba(255, 255, 255, 0.4);
-          border-radius: 16px;
           padding: 16px 32px;
-          color: white;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(10px);
-          min-width: 180px;
-          justify-content: center;
-        }
-
-        .btn:hover {
-          background: rgba(255, 255, 255, 0.3);
-          border-color: rgba(255, 255, 255, 0.6);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-icon {
-          font-size: 20px;
-        }
-
-        /* Main Content */
-        .result-main {
-          background: white;
-          padding: 80px 0;
-        }
-
-        /* Tab Navigation */
-        .tab-navigation {
-          margin-bottom: 48px;
-        }
-
-        .tab-list {
-          display: flex;
-          gap: 8px;
-          background: #f1f5f9;
-          border-radius: 20px;
-          padding: 8px;
-          overflow-x: auto;
-        }
-
-        .tab-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: transparent;
           border: none;
-          border-radius: 16px;
-          padding: 16px 24px;
-          color: #64748b;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          white-space: nowrap;
-          min-width: 140px;
-          justify-content: center;
-        }
-
-        .tab-button:hover {
-          background: rgba(255, 255, 255, 0.5);
-          color: #374151;
-        }
-
-        .tab-active {
-          background: white !important;
-          color: #1f2937 !important;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .tab-icon {
-          font-size: 18px;
-        }
-
-        /* Tab Content */
-        .tab-content-wrapper {
-          background: white;
-          border-radius: 24px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-          padding: 48px;
-          margin-bottom: 48px;
-        }
-
-        .tab-content h4 {
-          font-size: 24px;
-          font-weight: 700;
-          color: #1f2937;
-          margin: 0 0 24px 0;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .tab-content h5 {
-          font-size: 20px;
-          font-weight: 600;
-          color: #374151;
-          margin: 32px 0 16px 0;
-        }
-
-        /* Overview Tab */
-        .personality-overview {
-          display: grid;
-          gap: 40px;
-        }
-
-        .type-display {
-          display: flex;
-          align-items: center;
-          gap: 32px;
-          padding: 32px;
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
           border-radius: 20px;
-        }
-
-        .type-emoji {
-          font-size: 80px;
-        }
-
-        .type-info h2 {
-          font-size: 36px;
-          font-weight: 800;
-          color: #1f2937;
-          margin: 0 0 8px 0;
-        }
-
-        .type-info h3 {
-          font-size: 24px;
-          font-weight: 600;
-          color: #374151;
-          margin: 0 0 8px 0;
-        }
-
-        .type-info p {
-          font-size: 16px;
-          color: #6b7280;
-          margin: 0;
-        }
-
-        .description-card {
-          background: #f8fafc;
-          border-radius: 16px;
-          padding: 32px;
-        }
-
-        .description-card p {
           font-size: 18px;
-          line-height: 1.6;
-          color: #374151;
-          margin: 0;
-        }
-
-        .scores-section {
-          background: #f8fafc;
-          border-radius: 16px;
-          padding: 32px;
-        }
-
-        /* Radar Chart */
-        .radar-chart {
-          margin-top: 24px;
-        }
-
-        .chart-container {
-          display: grid;
-          gap: 16px;
-        }
-
-        .dimension {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-        }
-
-        .dimension-label {
-          width: 80px;
-          font-size: 14px;
-          font-weight: 600;
-          color: #374151;
-        }
-
-        .dimension-bar {
-          flex: 1;
-          height: 16px;
-          background: #e5e7eb;
-          border-radius: 8px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          text-decoration: none;
+          position: relative;
           overflow: hidden;
         }
 
-        .dimension-fill {
-          height: 100%;
-          border-radius: 8px;
-          transition: width 0.8s ease;
+        .share-button {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
-        .dimension-value {
-          width: 50px;
-          text-align: right;
-          font-size: 14px;
-          font-weight: 600;
+        .home-button {
+          background: rgba(255, 255, 255, 0.9);
           color: #374151;
-        }
-
-        /* Strengths Tab */
-        .strengths-section {
-          display: grid;
-          gap: 40px;
-        }
-
-        .traits-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 20px;
-        }
-
-        .trait-card {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 24px;
-          border-radius: 16px;
-          transition: all 0.3s ease;
-        }
-
-        .strength-card {
-          background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-          border: 2px solid #a7f3d0;
-        }
-
-        .challenge-card {
-          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-          border: 2px solid #fcd34d;
-        }
-
-        .trait-card:hover {
-          transform: translateY(-4px);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .trait-icon {
-          font-size: 24px;
-          flex-shrink: 0;
-        }
-
-        .trait-text {
-          font-size: 16px;
-          font-weight: 600;
-          color: #374151;
-          line-height: 1.4;
-        }
-
-        /* Careers Tab */
-        .careers-section {
-          display: grid;
-          gap: 40px;
-        }
-
-        .careers-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 20px;
-        }
-
-        .career-card {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 24px;
-          background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-          border: 2px solid #93c5fd;
-          border-radius: 16px;
-          transition: all 0.3s ease;
-          text-align: center;
-        }
-
-        .career-card:hover {
+        .share-button:hover, .home-button:hover {
           transform: translateY(-4px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 16px 40px rgba(102, 126, 234, 0.5);
         }
 
-        .career-icon {
-          font-size: 24px;
+        .analysis-section {
+          position: relative;
+          z-index: 10;
+          padding: 0 20px 80px;
         }
 
-        .career-text {
-          font-size: 16px;
-          font-weight: 600;
-          color: #374151;
+        .analysis-grid {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 32px;
         }
 
-        .career-advice {
-          background: #f8fafc;
-          border-radius: 16px;
+        .analysis-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 24px;
           padding: 32px;
+          box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          transition: transform 0.3s ease;
         }
 
-        .career-advice p {
-          font-size: 16px;
-          line-height: 1.6;
-          color: #374151;
+        .analysis-card:hover {
+          transform: translateY(-8px);
+        }
+
+        .card-header {
+          margin-bottom: 24px;
+        }
+
+        .card-header h3 {
+          font-size: 24px;
+          font-weight: 800;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           margin: 0;
         }
 
-        /* Relationships Tab */
-        .relationships-section {
-          display: grid;
-          gap: 40px;
+        .card-content {
+          space-y: 16px;
         }
 
-        .relationship-card {
+        .strength-item, .challenge-item, .career-item {
           display: flex;
           align-items: flex-start;
-          gap: 24px;
-          background: linear-gradient(135deg, #fef7ff 0%, #f3e8ff 100%);
-          border: 2px solid #d8b4fe;
-          border-radius: 16px;
-          padding: 32px;
+          gap: 12px;
+          margin-bottom: 16px;
+          font-size: 16px;
+          line-height: 1.6;
+          color: #374151;
         }
 
-        .relationship-icon {
-          font-size: 40px;
-          flex-shrink: 0;
-        }
-
-        .relationship-card p {
+        .bullet {
           font-size: 18px;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .relationship-text {
+          font-size: 16px;
           line-height: 1.6;
           color: #374151;
           margin: 0;
         }
 
-        .relationship-tips {
-          background: #f8fafc;
-          border-radius: 16px;
-          padding: 32px;
-        }
-
-        .tips-list {
-          display: grid;
-          gap: 16px;
-        }
-
-        .tip-item {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 16px 20px;
-          background: white;
-          border-radius: 12px;
-          border: 1px solid #e5e7eb;
-        }
-
-        .tip-icon {
-          font-size: 20px;
-          flex-shrink: 0;
-        }
-
-        /* Footer Actions */
-        .footer-actions {
-          text-align: center;
-        }
-
-        .btn-home {
-          background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
-          border: none;
-          color: white;
-        }
-
-        .btn-home:hover {
-          background: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
-          transform: translateY(-2px);
-        }
-
-        /* Share Dialog */
-        .share-overlay {
+        .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(8px);
           display: flex;
           align-items: center;
           justify-content: center;
           z-index: 1000;
-          backdrop-filter: blur(5px);
         }
 
-        .share-dialog {
-          background: white;
+        .modal-content {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
           border-radius: 24px;
-          width: 90%;
-          max-width: 500px;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+          padding: 32px;
+          min-width: 400px;
+          box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
         }
 
-        .share-header {
+        .modal-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 24px 32px;
-          border-bottom: 1px solid #e5e7eb;
+          margin-bottom: 24px;
         }
 
-        .share-header h3 {
-          font-size: 20px;
-          font-weight: 700;
-          color: #1f2937;
+        .modal-header h3 {
+          font-size: 24px;
+          font-weight: 800;
+          color: #374151;
           margin: 0;
         }
 
         .close-button {
+          background: none;
+          border: none;
+          font-size: 24px;
+          color: #6B7280;
+          cursor: pointer;
+          padding: 4px;
           width: 32px;
           height: 32px;
-          border: none;
-          background: #f3f4f6;
-          border-radius: 50%;
-          color: #6b7280;
-          cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.2s ease;
+          border-radius: 50%;
+          transition: background 0.2s ease;
         }
 
         .close-button:hover {
-          background: #e5e7eb;
-          color: #374151;
+          background: rgba(107, 114, 128, 0.1);
         }
 
-        .share-content {
-          padding: 32px;
-        }
-
-        .share-option {
-          display: flex;
-          align-items: center;
-          gap: 16px;
+        .copy-button {
           width: 100%;
-          padding: 20px;
-          background: #f8fafc;
-          border: 2px solid #e2e8f0;
-          border-radius: 16px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #374151;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          margin-bottom: 20px;
-        }
-
-        .share-option:hover {
-          background: #f1f5f9;
-          border-color: #cbd5e1;
-        }
-
-        .share-icon {
-          font-size: 20px;
-        }
-
-        .share-message p {
-          text-align: center;
-          color: #6b7280;
-          font-size: 14px;
-          margin: 0;
-        }
-
-        .loading-screen {
-          min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 20px;
-          color: #6b7280;
+          gap: 12px;
+          padding: 16px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          border: none;
+          border-radius: 16px;
+          font-size: 18px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: transform 0.2s ease;
         }
 
-        /* Responsive Design */
+        .copy-button:hover {
+          transform: translateY(-2px);
+        }
+
+        .success-message {
+          text-align: center;
+          padding: 20px;
+        }
+
+        .success-icon {
+          font-size: 48px;
+          display: block;
+          margin-bottom: 16px;
+        }
+
+        .success-message p {
+          font-size: 18px;
+          color: #10B981;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-          .container {
-            padding: 0 16px;
+          .hero-section {
+            padding: 40px 16px 60px;
           }
 
-          .hero-content {
-            padding: 20px 0;
-          }
-
-          .type-display {
+          .type-badge {
             flex-direction: column;
-            text-align: center;
-            gap: 20px;
+            gap: 16px;
+            padding: 20px;
           }
 
-          .tab-content-wrapper {
-            padding: 32px 24px;
+          .type-info {
+            text-align: center;
+          }
+
+          .type-title {
+            font-size: 36px;
+          }
+
+          .hero-title {
+            font-size: 28px;
+          }
+
+          .hero-description {
+            font-size: 18px;
           }
 
           .action-buttons {
@@ -1193,48 +851,28 @@ export default function ResultPage() {
             align-items: center;
           }
 
-          .btn {
+          .share-button, .home-button {
             width: 100%;
             max-width: 300px;
           }
 
-          .traits-grid,
-          .careers-grid {
+          .analysis-section {
+            padding: 0 16px 60px;
+          }
+
+          .analysis-grid {
             grid-template-columns: 1fr;
+            gap: 24px;
           }
 
-          .relationship-card {
-            flex-direction: column;
-            text-align: center;
+          .analysis-card {
+            padding: 24px;
           }
 
-          .type-emoji-large {
-            font-size: 80px;
-          }
-
-          .completion-badge {
-            padding: 12px 24px;
-            font-size: 16px;
-          }
-        }
-
-        /* Animation for reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-          .particle,
-          .btn,
-          .trait-card,
-          .career-card {
-            animation: none;
-            transition: none;
-          }
-        }
-
-        /* High contrast mode */
-        @media (prefers-contrast: high) {
-          .trait-card,
-          .career-card,
-          .relationship-card {
-            border-width: 3px;
+          .modal-content {
+            margin: 20px;
+            min-width: unset;
+            width: calc(100% - 40px);
           }
         }
       `}</style>

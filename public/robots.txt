@@ -1,0 +1,56 @@
+# robots.txt - Senior MBTI English Version
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://l3zee5a4g.vercel.app/sitemap.xml
+
+# Important pages priority crawl specification
+Allow: /
+Allow: /survey
+Allow: /result/*
+
+# Restrict crawling of files/directories
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /.well-known/
+Disallow: /temp/
+Disallow: /private/
+
+# Search engine specific optimization settings
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 3
+
+# Crawl frequency control
+# Popular pages for frequent crawling
+Allow: /result/intj
+Allow: /result/enfp
+Allow: /result/infj
+Allow: /result/entp
+
+# Exclude metadata files
+Disallow: *.json$
+Disallow: *.xml$
+Disallow: *.log$
+Disallow: *.tmp$
+
+# Exclude cache and build files
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /build/
+Disallow: /dist/
+
+# Vercel specific file exclusions
+Disallow: /vercel.json
+Disallow: /.vercel/

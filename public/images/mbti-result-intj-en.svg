@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4c1d95"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="typeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700"/>
+      <stop offset="100%" style="stop-color:#FFA500"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- 장식용 기하학적 요소들 -->
+  <polygon points="100,100 180,100 140,160" fill="rgba(255,255,255,0.1)"/>
+  <rect x="1000" y="400" width="100" height="100" rx="20" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="950" cy="150" r="40" fill="rgba(255,255,255,0.12)"/>
+  
+  <!-- 상단 브랜드 -->
+  <text x="600" y="80" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="'Inter', sans-serif" font-size="24" font-weight="600">Senior MBTI Result</text>
+  
+  <!-- MBTI 유형 배지 -->
+  <rect x="450" y="120" width="300" height="120" rx="20" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <text x="600" y="170" text-anchor="middle" fill="url(#typeGradient)" font-family="'Inter', sans-serif" font-size="60" font-weight="900">INTJ</text>
+  <text x="600" y="210" text-anchor="middle" fill="white" font-family="'Inter', sans-serif" font-size="32" font-weight="700">The Architect</text>
+  
+  <!-- 아이콘 -->
+  <text x="600" y="300" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Arial" font-size="48">🏛️</text>
+  
+  <!-- 특성 키워드 -->
+  <rect x="300" y="350" width="120" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+  <text x="360" y="375" text-anchor="middle" fill="white" font-family="'Inter', sans-serif" font-size="16" font-weight="600">Strategic</text>
+  
+  <rect x="540" y="350" width="120" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+  <text x="600" y="375" text-anchor="middle" fill="white" font-family="'Inter', sans-serif" font-size="16" font-weight="600">Independent</text>
+  
+  <rect x="780" y="350" width="120" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+  <text x="840" y="375" text-anchor="middle" fill="white" font-family="'Inter', sans-serif" font-size="16" font-weight="600">Visionary</text>
+  
+  <!-- 상성 정보 -->
+  <text x="600" y="450" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="'Inter', sans-serif" font-size="24" font-weight="600">💕 Best Match: ENFP, ENTP, INFJ</text>
+  
+  <!-- 하단 메시지 -->
+  <text x="600" y="520" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="'Inter', sans-serif" font-size="20" font-weight="500">Find your ideal companions with Senior MBTI</text>
+  
+  <!-- 하단 장식 아이콘들 -->
+  <text x="200" y="580" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Arial" font-size="24">🎯</text>
+  <text x="1000" y="580" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="Arial" font-size="24">✨</text>
+</svg>

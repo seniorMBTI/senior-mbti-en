@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700"/>
+      <stop offset="50%" style="stop-color:#FFA500"/>
+      <stop offset="100%" style="stop-color:#FF6B6B"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- 장식용 원형 요소들 -->
+  <circle cx="200" cy="150" r="80" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="1000" cy="400" r="120" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="900" cy="100" r="60" fill="rgba(255,255,255,0.12)"/>
+  
+  <!-- 메인 타이틀 -->
+  <text x="600" y="200" text-anchor="middle" fill="url(#titleGradient)" font-family="'Inter', sans-serif" font-size="72" font-weight="800">Senior MBTI</text>
+  
+  <!-- 부제목 -->
+  <text x="600" y="260" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="'Inter', sans-serif" font-size="32" font-weight="600">Personality Type Test</text>
+  
+  <!-- SEO 후킹 메시지 -->
+  <text x="600" y="340" text-anchor="middle" fill="white" font-family="'Inter', sans-serif" font-size="26" font-weight="700">🔍 Discover Your MBTI &amp; Compatible Types</text>
+  
+  <!-- 설명 텍스트 -->
+  <text x="600" y="390" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Inter', sans-serif" font-size="22" font-weight="500">Find your ideal life companions for</text>
+  <text x="600" y="425" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="'Inter', sans-serif" font-size="22" font-weight="500">the golden years ahead</text>
+  
+  <!-- 하단 장식 아이콘들 -->
+  <text x="400" y="550" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Arial" font-size="36">💕</text>
+  <text x="600" y="550" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Arial" font-size="36">🎯</text>
+  <text x="800" y="550" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Arial" font-size="36">✨</text>
+</svg>
