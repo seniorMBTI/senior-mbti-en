@@ -12,50 +12,229 @@ export default function SurveyPage() {
   const [selectedChoice, setSelectedChoice] = useState(null);
   const { t } = useLanguage();
 
-  // Multilingual questions data
+  // Senior-optimized 24 questions (2 choices each) - English Version
   const questions = [
+    // E/I Dimension - 6 questions
     {
       id: 1,
-      textKey: 'survey.q1.text',
-      text: t('landing.questions.sample'),
+      category: 'E/I',
+      text: 'How do you prefer to spend time with friends and acquaintances?',
       choices: [
-        { id: 1, text: t('landing.questions.choice1'), type: 'E' },
-        { id: 2, text: t('landing.questions.choice2'), type: 'I' },
-        { id: 3, text: '상황에 따라 다르다', type: 'N' },
-        { id: 4, text: '잘 모르겠다', type: 'N' }
+        { id: 'A', text: 'I enjoy gathering with many people for conversations and activities', type: 'E' },
+        { id: 'B', text: 'I prefer quiet conversations with a few close friends', type: 'I' }
       ]
     },
     {
       id: 2,
-      textKey: 'survey.q2.text',
-      text: '계획을 세워서 일을 진행하는 것을 선호하시나요?',
+      category: 'E/I',
+      text: 'When you\'re tired at the end of the day, how do you prefer to recharge?',
       choices: [
-        { id: 1, text: '매우 그렇다 - 미리 계획하는 것이 편하다', type: 'J' },
-        { id: 2, text: '그렇다 - 어느 정도 계획은 필요하다', type: 'J' },
-        { id: 3, text: '그렇지 않다 - 유연하게 대응하는 편이다', type: 'P' },
-        { id: 4, text: '전혀 그렇지 않다 - 즉흥적인 것이 좋다', type: 'P' }
+        { id: 'A', text: 'I spend time talking with family or friends', type: 'E' },
+        { id: 'B', text: 'I prefer to have quiet time alone to rest', type: 'I' }
       ]
     },
     {
       id: 3,
-      textKey: 'survey.q3.text', 
-      text: '새로운 정보를 받아들일 때 어떤 방식을 선호하시나요?',
+      category: 'E/I',
+      text: 'How do you typically behave when meeting new people?',
       choices: [
-        { id: 1, text: '구체적이고 실용적인 정보를 좋아한다', type: 'S' },
-        { id: 2, text: '전체적인 맥락과 의미를 파악하려 한다', type: 'N' },
-        { id: 3, text: '경험을 통해 직접 확인하고 싶다', type: 'S' },
-        { id: 4, text: '가능성과 잠재력을 생각해본다', type: 'N' }
+        { id: 'A', text: 'I approach them first and start conversations', type: 'E' },
+        { id: 'B', text: 'I wait for them to approach me first', type: 'I' }
       ]
     },
     {
       id: 4,
-      textKey: 'survey.q4.text',
-      text: '중요한 결정을 내릴 때 무엇을 더 중요하게 생각하시나요?',
+      category: 'E/I',
+      text: 'What activities do you prefer on weekends or holidays?',
       choices: [
-        { id: 1, text: '논리적 분석과 객관적 사실', type: 'T' },
-        { id: 2, text: '사람들의 감정과 관계', type: 'F' },
-        { id: 3, text: '공정성과 원칙', type: 'T' },
-        { id: 4, text: '조화와 배려', type: 'F' }
+        { id: 'A', text: 'I participate in outings or gatherings with friends and family', type: 'E' },
+        { id: 'B', text: 'I enjoy solo activities at home like reading or watching movies', type: 'I' }
+      ]
+    },
+    {
+      id: 5,
+      category: 'E/I',
+      text: 'What is your preference regarding phone conversations?',
+      choices: [
+        { id: 'A', text: 'I enjoy talking on the phone and call frequently', type: 'E' },
+        { id: 'B', text: 'Unless urgent, I prefer texting or written messages', type: 'I' }
+      ]
+    },
+    {
+      id: 6,
+      category: 'E/I',
+      text: 'How do you behave at lectures or group meetings?',
+      choices: [
+        { id: 'A', text: 'I actively participate and share my opinions with others', type: 'E' },
+        { id: 'B', text: 'I mostly listen and speak thoughtfully after careful consideration', type: 'I' }
+      ]
+    },
+    
+    // S/N Dimension - 6 questions
+    {
+      id: 7,
+      category: 'S/N',
+      text: 'When learning something new, which approach do you prefer?',
+      choices: [
+        { id: 'A', text: 'I learn step by step through concrete facts and real experiences', type: 'S' },
+        { id: 'B', text: 'I try to understand the overall meaning and possibilities first', type: 'N' }
+      ]
+    },
+    {
+      id: 8,
+      category: 'S/N',
+      text: 'When solving problems, which approach do you prefer?',
+      choices: [
+        { id: 'A', text: 'I use past experiences and proven methods', type: 'S' },
+        { id: 'B', text: 'I look for new ideas and creative solutions', type: 'N' }
+      ]
+    },
+    {
+      id: 9,
+      category: 'S/N',
+      text: 'What topics do you prefer when having conversations?',
+      choices: [
+        { id: 'A', text: 'I share concrete daily stories and practical information', type: 'S' },
+        { id: 'B', text: 'I discuss future dreams and philosophical thoughts', type: 'N' }
+      ]
+    },
+    {
+      id: 10,
+      category: 'S/N',
+      text: 'When planning travel, what do you focus on more?',
+      choices: [
+        { id: 'A', text: 'I prefer places I\'ve been before or well-known destinations', type: 'S' },
+        { id: 'B', text: 'I look forward to new places and unexpected discoveries', type: 'N' }
+      ]
+    },
+    {
+      id: 11,
+      category: 'S/N',
+      text: 'When working on tasks, which approach do you prefer?',
+      choices: [
+        { id: 'A', text: 'I proceed step by step and check details carefully', type: 'S' },
+        { id: 'B', text: 'I understand the overall flow and draw the big picture first', type: 'N' }
+      ]
+    },
+    {
+      id: 12,
+      category: 'S/N',
+      text: 'When reading books or watching movies, what do you prefer?',
+      choices: [
+        { id: 'A', text: 'I prefer realistic content based on actual experiences', type: 'S' },
+        { id: 'B', text: 'I prefer content that stimulates imagination and shows new worlds', type: 'N' }
+      ]
+    },
+    
+    // T/F Dimension - 6 questions
+    {
+      id: 13,
+      category: 'T/F',
+      text: 'When making important decisions, what do you consider most important?',
+      choices: [
+        { id: 'A', text: 'I make judgments based on objective facts and logical analysis', type: 'T' },
+        { id: 'B', text: 'I prioritize the feelings and relationships of people involved', type: 'F' }
+      ]
+    },
+    {
+      id: 14,
+      category: 'T/F',
+      text: 'How do you respond when someone makes a mistake?',
+      choices: [
+        { id: 'A', text: 'I focus on the cause of the problem and point out solutions', type: 'T' },
+        { id: 'B', text: 'I consider their feelings first and offer encouragement and comfort', type: 'F' }
+      ]
+    },
+    {
+      id: 15,
+      category: 'T/F',
+      text: 'What attitude do you take in arguments or conflict situations?',
+      choices: [
+        { id: 'A', text: 'I make fair judgments based on facts and logic', type: 'T' },
+        { id: 'B', text: 'I consider everyone\'s feelings and strive for harmony', type: 'F' }
+      ]
+    },
+    {
+      id: 16,
+      category: 'T/F',
+      text: 'When giving advice, how do you help others?',
+      choices: [
+        { id: 'A', text: 'I provide practical solutions that will be helpful in the future', type: 'T' },
+        { id: 'B', text: 'I empathize with their emotions and offer comfort and encouragement', type: 'F' }
+      ]
+    },
+    {
+      id: 17,
+      category: 'T/F',
+      text: 'When evaluating others, what do you consider more important?',
+      choices: [
+        { id: 'A', text: 'I objectively assess their abilities and achievements', type: 'T' },
+        { id: 'B', text: 'I first consider their intentions, efforts, and human qualities', type: 'F' }
+      ]
+    },
+    {
+      id: 18,
+      category: 'T/F',
+      text: 'When making important decisions, which criteria do you value more?',
+      choices: [
+        { id: 'A', text: 'I value fairness, principles, and consistent standards', type: 'T' },
+        { id: 'B', text: 'I prioritize human emotions and individual circumstances', type: 'F' }
+      ]
+    },
+    
+    // J/P Dimension - 6 questions
+    {
+      id: 19,
+      category: 'J/P',
+      text: 'How do you prefer to manage your daily life?',
+      choices: [
+        { id: 'A', text: 'I make plans in advance and proceed systematically according to schedule', type: 'J' },
+        { id: 'B', text: 'I respond flexibly to situations and let things flow naturally', type: 'P' }
+      ]
+    },
+    {
+      id: 20,
+      category: 'J/P',
+      text: 'How do you feel when you have unfinished tasks?',
+      choices: [
+        { id: 'A', text: 'I feel uncomfortable and anxious, wanting to finish them quickly', type: 'J' },
+        { id: 'B', text: 'I don\'t feel rushed and am okay with proceeding slowly', type: 'P' }
+      ]
+    },
+    {
+      id: 21,
+      category: 'J/P',
+      text: 'What are your thoughts on appointments and plans?',
+      choices: [
+        { id: 'A', text: 'I think appointments are important commitments that must be kept', type: 'J' },
+        { id: 'B', text: 'I think of them as flexible guidelines that can change with circumstances', type: 'P' }
+      ]
+    },
+    {
+      id: 22,
+      category: 'J/P',
+      text: 'What style do you prefer when going on trips?',
+      choices: [
+        { id: 'A', text: 'I book everything in advance - schedule, accommodation, and attractions', type: 'J' },
+        { id: 'B', text: 'I make rough plans and decide things spontaneously at the destination', type: 'P' }
+      ]
+    },
+    {
+      id: 23,
+      category: 'J/P',
+      text: 'When working on tasks, which approach do you prefer?',
+      choices: [
+        { id: 'A', text: 'I proceed step by step from beginning to end in order', type: 'J' },
+        { id: 'B', text: 'I start with what I want to do and proceed freely', type: 'P' }
+      ]
+    },
+    {
+      id: 24,
+      category: 'J/P',
+      text: 'How do you behave when you need to make choices?',
+      choices: [
+        { id: 'A', text: 'After sufficient consideration, I make a decision and don\'t change it', type: 'J' },
+        { id: 'B', text: 'I often postpone choices and decide at the last moment', type: 'P' }
       ]
     }
   ];
@@ -93,23 +272,40 @@ export default function SurveyPage() {
   const handleSubmit = async (finalAnswers) => {
     setIsSubmitting(true);
     
-    // Simple MBTI calculation
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Senior-friendly loading time
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
-    const score = finalAnswers.reduce((sum, answer) => sum + answer, 0);
-    const resultId = score > 8 ? 'ENFJ' : 'INTJ';
+    // MBTI score calculation (24 questions, 6 per dimension)
+    const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
     
-    router.push(`/result/${resultId}`);
+    finalAnswers.forEach((answer, index) => {
+      const question = questions[index];
+      const choice = question.choices.find(c => c.id === answer);
+      if (choice) {
+        scores[choice.type]++;
+      }
+    });
+    
+    // Determine MBTI type
+    const mbtiType = 
+      (scores.E > scores.I ? 'E' : 'I') +
+      (scores.S > scores.N ? 'S' : 'N') +
+      (scores.T > scores.F ? 'T' : 'F') +
+      (scores.J > scores.P ? 'J' : 'P');
+    
+    console.log('MBTI scores:', scores);
+    console.log('Final type:', mbtiType);
+    
+    router.push(`/result/${mbtiType}`);
   };
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e) => {
-      if (e.key >= '1' && e.key <= '4') {
-        const choiceIndex = parseInt(e.key) - 1;
-        if (choiceIndex < currentQ.choices.length) {
-          setSelectedChoice(currentQ.choices[choiceIndex].id);
-        }
+      if (e.key === '1') {
+        setSelectedChoice('A');
+      } else if (e.key === '2') {
+        setSelectedChoice('B');
       } else if (e.key === 'Enter' && selectedChoice !== null) {
         handleNext();
       } else if (e.key === 'Escape') {
@@ -130,7 +326,7 @@ export default function SurveyPage() {
             <button 
               onClick={() => router.push('/')}
               className="back-button"
-              aria-label="홈으로 돌아가기"
+              aria-label="Return to home"
             >
               ← {t('survey.home')}
             </button>
@@ -173,11 +369,11 @@ export default function SurveyPage() {
               
               {currentQuestion < questions.length - 1 ? (
                 <div className="remaining-questions">
-                  {questions.length - currentQuestion - 1}개 남음
+                  {questions.length - currentQuestion - 1} remaining
                 </div>
               ) : (
                 <div className="final-question">
-                  마지막 질문입니다!
+                  Final question!
                 </div>
               )}
             </div>
@@ -191,27 +387,26 @@ export default function SurveyPage() {
                 {t('survey.hint')}
               </p>
 
-              <div className="choices-grid">
+              <div className="choices-container">
                 {currentQ.choices.map((choice, index) => (
                   <button
                     key={choice.id}
                     onClick={() => handleChoiceSelect(choice.id)}
-                    className={`choice-button ${
+                    className={`choice-button senior-choice ${
                       selectedChoice === choice.id ? 'choice-selected' : ''
                     }`}
-                    aria-label={`선택지 ${index + 1}: ${choice.text}`}
+                    aria-label={`Choice ${choice.id}: ${choice.text}`}
                   >
-                    <div className="choice-number">
-                      {index + 1}
+                    <div className="choice-label">
+                      <span className="choice-letter">{choice.id}</span>
+                      <span className="choice-number">({index + 1} key)</span>
                     </div>
                     <div className="choice-content">
                       <span className="choice-text">{choice.text}</span>
                     </div>
                     <div className="choice-indicator">
                       {selectedChoice === choice.id && (
-                        <svg className="check-icon" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
+                        <div className="selected-icon">✓</div>
                       )}
                     </div>
                   </button>
@@ -233,7 +428,7 @@ export default function SurveyPage() {
 
             <div className="nav-center">
               <div className="keyboard-hint">
-                💡 키보드 1-4 숫자키로 선택 가능
+                💡 Keyboard shortcuts: 1(A) / 2(B)
               </div>
             </div>
 
@@ -453,78 +648,124 @@ export default function SurveyPage() {
           border-left: 4px solid #3b82f6;
         }
 
-        .choices-grid {
-          display: grid;
-          gap: 16px;
+        /* Senior-friendly 2-choice container */
+        .choices-container {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          margin-top: 32px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
-        .choice-button {
+        /* Senior-friendly choice button */
+        .senior-choice {
           display: flex;
           align-items: center;
-          gap: 20px;
-          padding: 20px 24px;
-          background: #f8fafc;
-          border: 2px solid #e2e8f0;
-          border-radius: 16px;
+          gap: 24px;
+          padding: 24px 32px;
+          background: #ffffff;
+          border: 3px solid #e5e7eb;
+          border-radius: 20px;
           cursor: pointer;
           transition: all 0.3s ease;
           text-align: left;
           width: 100%;
           position: relative;
+          min-height: 100px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .choice-button:hover {
+        .senior-choice:hover {
           border-color: #3b82f6;
-          background: #eff6ff;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+          background: #f8fafc;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
         }
 
         .choice-selected {
-          border-color: #3b82f6 !important;
-          background: #eff6ff !important;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          border-color: #22c55e !important;
+          background: #f0fdf4 !important;
+          box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+          transform: translateY(-3px);
+        }
+
+        .choice-label {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 80px;
+          flex-shrink: 0;
+        }
+
+        .choice-letter {
+          width: 50px;
+          height: 50px;
+          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+          color: white;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 800;
+          font-size: 24px;
+          margin-bottom: 8px;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .choice-selected .choice-letter {
+          background: linear-gradient(135deg, #22c55e, #16a34a);
+          box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
         }
 
         .choice-number {
+          font-size: 12px;
+          color: #6b7280;
+          font-weight: 600;
+          text-align: center;
+        }
+
+        .choice-content {
+          flex: 1;
+          padding: 0 16px;
+        }
+
+        .choice-text {
+          font-size: 18px;
+          font-weight: 600;
+          color: #1f2937;
+          line-height: 1.6;
+          word-break: keep-all;
+        }
+
+        .choice-indicator {
           width: 40px;
           height: 40px;
-          background: #3b82f6;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .selected-icon {
+          width: 32px;
+          height: 32px;
+          background: #22c55e;
           color: white;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
           font-size: 18px;
-          flex-shrink: 0;
+          font-weight: 800;
+          animation: checkmark 0.3s ease-in-out;
         }
 
-        .choice-selected .choice-number {
-          background: #1d4ed8;
-        }
-
-        .choice-content {
-          flex: 1;
-        }
-
-        .choice-text {
-          font-size: 16px;
-          font-weight: 500;
-          color: #374151;
-          line-height: 1.5;
-        }
-
-        .choice-indicator {
-          width: 24px;
-          height: 24px;
-          color: #3b82f6;
-          flex-shrink: 0;
-        }
-
-        .check-icon {
-          width: 24px;
-          height: 24px;
+        @keyframes checkmark {
+          0% { transform: scale(0); }
+          50% { transform: scale(1.2); }
+          100% { transform: scale(1); }
         }
 
         /* Navigation */
