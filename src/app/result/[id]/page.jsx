@@ -494,6 +494,104 @@ export default function ResultPage() {
         </div>
       </div>
 
+      {/* Compatibility Information Section */}
+      <div className="compatibility-section">
+        <div className="section-header">
+          <h2 className="section-title">💕 MBTI Types That Match Well With You</h2>
+          <p className="section-subtitle">Relationships become even more precious in our senior years. Which personality types are you most compatible with?</p>
+        </div>
+        
+        <div className="compatibility-grid">
+          {/* Best Match */}
+          <div className="compatibility-card best-match">
+            <div className="card-header">
+              <h3>💖 Perfect Match</h3>
+              <p>Types with whom you can build deep and meaningful relationships</p>
+            </div>
+            <div className="card-content">
+              {mbtiCompatibility[resultData.mbtiType]?.bestMatch.map((type, index) => (
+                <div key={index} className="compatibility-item">
+                  <span className="type-badge-small">{type}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Good Match */}
+          <div className="compatibility-card good-match">
+            <div className="card-header">
+              <h3>😊 Good Match</h3>
+              <p>Types with whom you can maintain comfortable and stable relationships</p>
+            </div>
+            <div className="card-content">
+              {mbtiCompatibility[resultData.mbtiType]?.goodMatch.map((type, index) => (
+                <div key={index} className="compatibility-item">
+                  <span className="type-badge-small">{type}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Challenging Match */}
+          <div className="compatibility-card challenging-match">
+            <div className="card-header">
+              <h3>🤔 Growth Match</h3>
+              <p>Types with whom you can grow by understanding differences</p>
+            </div>
+            <div className="card-content">
+              {mbtiCompatibility[resultData.mbtiType]?.challengingMatch.map((type, index) => (
+                <div key={index} className="compatibility-item">
+                  <span className="type-badge-small">{type}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Senior-Specific Advice Section */}
+      <div className="senior-advice-section">
+        <div className="section-header">
+          <h2 className="section-title">🎯 Senior Life Guide Tailored to You</h2>
+          <p className="section-subtitle">Personalized senior lifestyle advice based on your personality type</p>
+        </div>
+        
+        <div className="advice-grid">
+          {/* Lifestyle Advice Card */}
+          <div className="advice-card lifestyle-card">
+            <div className="card-header">
+              <h3>🌟 Lifestyle Advice</h3>
+            </div>
+            <div className="card-content">
+              {typeInfo.seniorTips?.map((tip, index) => (
+                <div key={index} className="advice-item">
+                  <span className="bullet">💡</span>
+                  <span>{tip}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Health Management Card */}
+          <div className="advice-card health-card">
+            <div className="card-header">
+              <h3>🏥 Health Management Advice</h3>
+            </div>
+            <div className="card-content">
+              {typeInfo.healthTips?.map((tip, index) => (
+                <div key={index} className="advice-item">
+                  <span className="bullet">🌿</span>
+                  <span>{tip}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Share Modal */}
       {showShareDialog && (
         <div className="modal-overlay" onClick={() => setShowShareDialog(false)}>
@@ -818,6 +916,140 @@ export default function ResultPage() {
           margin: 0;
         }
 
+        /* Compatibility and Senior Advice Sections */
+        .compatibility-section, .senior-advice-section {
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          padding: 60px 24px;
+          margin: 40px 0;
+        }
+
+        .section-title {
+          font-size: 32px;
+          font-weight: 800;
+          color: #1e293b;
+          text-align: center;
+          margin-bottom: 8px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .section-subtitle {
+          font-size: 18px;
+          color: #64748b;
+          text-align: center;
+          margin-bottom: 40px;
+          font-weight: 500;
+        }
+
+        .compatibility-grid, .advice-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 32px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .compatibility-card, .advice-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          border-radius: 20px;
+          padding: 32px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+        }
+
+        .compatibility-card:hover, .advice-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: #1e293b;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .card-icon {
+          font-size: 24px;
+        }
+
+        .perfect-match {
+          border-left: 4px solid #10b981;
+        }
+
+        .good-match {
+          border-left: 4px solid #3b82f6;
+        }
+
+        .growth-match {
+          border-left: 4px solid #f59e0b;
+        }
+
+        .compatibility-item, .advice-item {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 16px;
+          padding: 12px;
+          background: rgba(248, 250, 252, 0.8);
+          border-radius: 12px;
+          transition: all 0.2s ease;
+        }
+
+        .compatibility-item:hover, .advice-item:hover {
+          background: rgba(241, 245, 249, 0.9);
+          transform: translateX(4px);
+        }
+
+        .type-badge-small {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 32px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 800;
+          flex-shrink: 0;
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .type-name {
+          font-size: 16px;
+          font-weight: 600;
+          color: #374151;
+          flex: 1;
+        }
+
+        .advice-item .bullet {
+          font-size: 20px;
+          flex-shrink: 0;
+        }
+
+        .advice-item span:last-child {
+          font-size: 16px;
+          line-height: 1.6;
+          color: #374151;
+          flex: 1;
+        }
+
+        .lifestyle-card {
+          border-left: 4px solid #f59e0b;
+        }
+
+        .health-card {
+          border-left: 4px solid #059669;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
           .hero-section {
@@ -873,6 +1105,51 @@ export default function ResultPage() {
             margin: 20px;
             min-width: unset;
             width: calc(100% - 40px);
+          }
+
+          .compatibility-section, .senior-advice-section {
+            padding: 40px 16px;
+          }
+
+          .section-title {
+            font-size: 26px;
+          }
+
+          .section-subtitle {
+            font-size: 16px;
+          }
+
+          .compatibility-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+
+          .advice-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+
+          .compatibility-card, .advice-card {
+            padding: 24px;
+          }
+
+          .compatibility-item, .advice-item {
+            gap: 12px;
+            padding: 16px 12px;
+          }
+
+          .type-badge-small {
+            width: 40px;
+            height: 28px;
+            font-size: 11px;
+          }
+
+          .type-name {
+            font-size: 14px;
+          }
+
+          .advice-item span:last-child {
+            font-size: 15px;
           }
         }
       `}</style>
