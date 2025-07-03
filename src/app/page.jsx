@@ -15,7 +15,7 @@ export default function HomePage() {
     setMounted(true);
   }, []);
 
-  // 언어별 타이틀 동적 설정
+  // Dynamic title setting by language
   useEffect(() => {
     const titles = {
       ko: '시니어 MBTI - 성격 유형 테스트',
@@ -69,6 +69,11 @@ export default function HomePage() {
 
   return (
     <div className="landing-container">
+      {/* SEO Optimized Main Header */}
+      <header className="seo-header">
+        <h1 className="visually-hidden">Senior MBTI | Middle-aged Personality Type Test | Post-retirement Life Planning Guide</h1>
+      </header>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-background">
@@ -89,19 +94,19 @@ export default function HomePage() {
           {/* Hero Content */}
           <div className="hero-content">
             <div className="hero-badge">
-              <span className="badge-text">✨ {t('landing.welcome')}</span>
+              <span className="badge-text">✨ 60+ Senior-Specific Personality Analysis</span>
             </div>
             
-            <h1 className="hero-title">
-              <span className="title-highlight">{t('landing.title')}</span>
-            </h1>
+            <h2 className="hero-title">
+              <span className="title-highlight">Senior MBTI Personality Type Test</span>
+            </h2>
             
             <p className="hero-tagline">
-              {t('landing.tagline')}
+              Professional psychological analysis for post-retirement new life and ideal relationships
             </p>
             
             <p className="hero-description">
-              {t('landing.description')}
+              An MBTI personality type test specially designed for people aged 60 and above to help you find the most compatible companions. Discover new possibilities for your golden years through this free psychological test.
             </p>
             
             <div className="hero-seo-hook">
@@ -109,7 +114,7 @@ export default function HomePage() {
                 <strong>🔍 Discover your MBTI and find compatible personality types!</strong>
               </p>
               <p className="seo-hook-sub">
-                Identify people with compatible personalities who will make great companions for the rest of your life journey!
+                Find people with compatible personalities who will share your remaining years together! We provide personalized compatibility analysis optimized for senior lifestyles.
               </p>
             </div>
 
@@ -155,11 +160,21 @@ export default function HomePage() {
         <div className="container">
           <div className="features-header">
             <h2 className="features-title">
-              Why Choose Senior MBTI?
+              Why Senior MBTI is Special for Middle-aged Adults
             </h2>
             <p className="features-subtitle">
-              Accurate personality analysis based on your rich life experience
+              Professional personality analysis and lifestyle guide for post-retirement life for those 60+
             </p>
+            <div className="seo-benefits">
+              <h3 className="seo-benefits-title">Special Benefits of Senior-Tailored MBTI Testing</h3>
+              <ul className="benefits-list">
+                <li>✅ <strong>Middle-aged psychology experts</strong> designed senior-specific questions</li>
+                <li>✅ <strong>Post-retirement life planning</strong> with customized advice</li>
+                <li>✅ <strong>60+ relationships</strong> compatibility analysis for improvement</li>
+                <li>✅ <strong>Golden years lifestyle</strong> optimized personality interpretation</li>
+                <li>✅ <strong>Senior health management</strong> linked lifestyle guide</li>
+              </ul>
+            </div>
           </div>
 
           <div className="features-grid">
@@ -187,10 +202,10 @@ export default function HomePage() {
         <div className="container">
           <div className="showcase-header">
             <h2 className="showcase-title">
-              💕 MBTI Compatibility Preview
+              💕 MBTI Compatibility Analysis Preview
             </h2>
             <p className="showcase-subtitle">
-              Preview the MBTI types that are most and least compatible with you
+              Preview the MBTI types that are most compatible and challenging for you
             </p>
           </div>
 
@@ -203,11 +218,11 @@ export default function HomePage() {
               <div className="mbti-cards">
                 <div className="mbti-card intj-card">
                   <div className="mbti-type">INTJ</div>
-                  <div className="mbti-name">Architect</div>
+                  <div className="mbti-name">The Architect</div>
                   <div className="mbti-traits">
-                    <span className="trait">Strategic</span>
+                    <span className="trait">Strategic thinking</span>
                     <span className="trait">Independent</span>
-                    <span className="trait">Visionary</span>
+                    <span className="trait">Long-term planning</span>
                   </div>
                 </div>
                 <div className="compatibility-indicator">
@@ -216,7 +231,7 @@ export default function HomePage() {
                 </div>
                 <div className="mbti-card enfp-card">
                   <div className="mbti-type">ENFP</div>
-                  <div className="mbti-name">Campaigner</div>
+                  <div className="mbti-name">The Campaigner</div>
                   <div className="mbti-traits">
                     <span className="trait">Enthusiastic</span>
                     <span className="trait">Creative</span>
@@ -225,32 +240,32 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="compatibility-reason">
-                <p>Strategic INTJs and creative ENFPs complement each other beautifully, forming deep relationships based on mutual understanding and respect.</p>
+                <p>The systematic INTJ and creative ENFP complement each other's strengths and form relationships based on deep understanding.</p>
               </div>
             </div>
 
             <div className="example-card challenging-match-example">
               <div className="example-header">
-                <h3 className="example-title">💛 Growth Opportunity Example</h3>
+                <h3 className="example-title">💛 Understanding Required Example</h3>
                 <p className="example-subtitle">INTJ × ESFJ Combination</p>
               </div>
               <div className="mbti-cards">
                 <div className="mbti-card intj-card">
                   <div className="mbti-type">INTJ</div>
-                  <div className="mbti-name">Architect</div>
+                  <div className="mbti-name">The Architect</div>
                   <div className="mbti-traits">
                     <span className="trait">Logical</span>
                     <span className="trait">Independent</span>
-                    <span className="trait">Planning</span>
+                    <span className="trait">Systematic</span>
                   </div>
                 </div>
                 <div className="compatibility-indicator challenging">
                   <div className="heart-icon">💛</div>
-                  <div className="compatibility-text">Needs Effort</div>
+                  <div className="compatibility-text">Effort Needed</div>
                 </div>
                 <div className="mbti-card esfj-card">
                   <div className="mbti-type">ESFJ</div>
-                  <div className="mbti-name">Consul</div>
+                  <div className="mbti-name">The Consul</div>
                   <div className="mbti-traits">
                     <span className="trait">Caring</span>
                     <span className="trait">Social</span>
@@ -259,7 +274,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="compatibility-reason">
-                <p>While they approach life differently, mutual understanding and consideration can create a balanced and enriching relationship.</p>
+                <p>While they have different approaches, they can create balanced relationships through mutual understanding and consideration.</p>
               </div>
             </div>
           </div>
@@ -270,207 +285,8 @@ export default function HomePage() {
               className="showcase-cta-button"
             >
               <span>🎯</span>
-              Discover My MBTI Compatibility
+              Check My MBTI Compatibility
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* MBTI Types Internal Linking Section */}
-      <section className="mbti-types-section">
-        <div className="container">
-          <div className="types-header">
-            <h2 className="types-title">
-              🎭 Explore the 16 MBTI Personality Types
-            </h2>
-            <p className="types-subtitle">
-              Learn about your personality type and its compatibility with other types
-            </p>
-          </div>
-
-          <div className="mbti-grid">
-            {/* NT - Analysts Group */}
-            <div className="mbti-group nt-group">
-              <h3 className="group-title">
-                <span className="group-icon">🧠</span>
-                NT - Analysts
-              </h3>
-              <p className="group-description">Value theoretical thinking and strategic planning</p>
-              <div className="types-grid">
-                <a href="/result/intj" className="type-link intj-link">
-                  <div className="type-card">
-                    <div className="type-code">INTJ</div>
-                    <div className="type-name">Architect</div>
-                    <div className="type-traits">Strategic · Independent · Visionary</div>
-                  </div>
-                </a>
-                <a href="/result/intp" className="type-link intp-link">
-                  <div className="type-card">
-                    <div className="type-code">INTP</div>
-                    <div className="type-name">Thinker</div>
-                    <div className="type-traits">Innovative · Theoretical · Curious</div>
-                  </div>
-                </a>
-                <a href="/result/entj" className="type-link entj-link">
-                  <div className="type-card">
-                    <div className="type-code">ENTJ</div>
-                    <div className="type-name">Commander</div>
-                    <div className="type-traits">Bold · Imaginative · Strong-willed</div>
-                  </div>
-                </a>
-                <a href="/result/entp" className="type-link entp-link">
-                  <div className="type-card">
-                    <div className="type-code">ENTP</div>
-                    <div className="type-name">Debater</div>
-                    <div className="type-traits">Smart · Curious · Energetic</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* NF - Diplomats Group */}
-            <div className="mbti-group nf-group">
-              <h3 className="group-title">
-                <span className="group-icon">💝</span>
-                NF - Diplomats
-              </h3>
-              <p className="group-description">Idealists who value empathy and harmony</p>
-              <div className="types-grid">
-                <a href="/result/infj" className="type-link infj-link">
-                  <div className="type-card">
-                    <div className="type-code">INFJ</div>
-                    <div className="type-name">Advocate</div>
-                    <div className="type-traits">Creative · Insightful · Idealistic</div>
-                  </div>
-                </a>
-                <a href="/result/infp" className="type-link infp-link">
-                  <div className="type-card">
-                    <div className="type-code">INFP</div>
-                    <div className="type-name">Mediator</div>
-                    <div className="type-traits">Poetic · Kind · Altruistic</div>
-                  </div>
-                </a>
-                <a href="/result/enfj" className="type-link enfj-link">
-                  <div className="type-card">
-                    <div className="type-code">ENFJ</div>
-                    <div className="type-name">Protagonist</div>
-                    <div className="type-traits">Charismatic · Inspiring · Altruistic</div>
-                  </div>
-                </a>
-                <a href="/result/enfp" className="type-link enfp-link">
-                  <div className="type-card">
-                    <div className="type-code">ENFP</div>
-                    <div className="type-name">Campaigner</div>
-                    <div className="type-traits">Enthusiastic · Creative · Social</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* SJ - Sentinels Group */}
-            <div className="mbti-group sj-group">
-              <h3 className="group-title">
-                <span className="group-icon">🏛️</span>
-                SJ - Sentinels
-              </h3>
-              <p className="group-description">Pragmatists who value order and responsibility</p>
-              <div className="types-grid">
-                <a href="/result/istj" className="type-link istj-link">
-                  <div className="type-card">
-                    <div className="type-code">ISTJ</div>
-                    <div className="type-name">Logistician</div>
-                    <div className="type-traits">Practical · Fact-minded · Reliable</div>
-                  </div>
-                </a>
-                <a href="/result/isfj" className="type-link isfj-link">
-                  <div className="type-card">
-                    <div className="type-code">ISFJ</div>
-                    <div className="type-name">Protector</div>
-                    <div className="type-traits">Warm-hearted · Responsible · Generous</div>
-                  </div>
-                </a>
-                <a href="/result/estj" className="type-link estj-link">
-                  <div className="type-card">
-                    <div className="type-code">ESTJ</div>
-                    <div className="type-name">Executive</div>
-                    <div className="type-traits">Excellent administrators · Leadership · Traditional</div>
-                  </div>
-                </a>
-                <a href="/result/esfj" className="type-link esfj-link">
-                  <div className="type-card">
-                    <div className="type-code">ESFJ</div>
-                    <div className="type-name">Consul</div>
-                    <div className="type-traits">Caring · Social · Popular</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* SP - Explorers Group */}
-            <div className="mbti-group sp-group">
-              <h3 className="group-title">
-                <span className="group-icon">🎨</span>
-                SP - Explorers
-              </h3>
-              <p className="group-description">Free spirits who value spontaneity and flexibility</p>
-              <div className="types-grid">
-                <a href="/result/istp" className="type-link istp-link">
-                  <div className="type-card">
-                    <div className="type-code">ISTP</div>
-                    <div className="type-name">Virtuoso</div>
-                    <div className="type-traits">Bold · Practical · Experimental</div>
-                  </div>
-                </a>
-                <a href="/result/isfp" className="type-link isfp-link">
-                  <div className="type-card">
-                    <div className="type-code">ISFP</div>
-                    <div className="type-name">Adventurer</div>
-                    <div className="type-traits">Flexible · Charming · Artistic</div>
-                  </div>
-                </a>
-                <a href="/result/estp" className="type-link estp-link">
-                  <div className="type-card">
-                    <div className="type-code">ESTP</div>
-                    <div className="type-name">Entrepreneur</div>
-                    <div className="type-traits">Energetic · Perceptive · Spontaneous</div>
-                  </div>
-                </a>
-                <a href="/result/esfp" className="type-link esfp-link">
-                  <div className="type-card">
-                    <div className="type-code">ESFP</div>
-                    <div className="type-name">Entertainer</div>
-                    <div className="type-traits">Spontaneous · Energetic · Enthusiastic</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="related-links">
-            <h3 className="related-title">Related Useful Information</h3>
-            <div className="related-grid">
-              <a href="/compatibility" className="related-link">
-                <div className="related-card">
-                  <span className="related-icon">💕</span>
-                  <h4>Compatibility Analysis</h4>
-                  <p>Explore the MBTI types most compatible with you</p>
-                </div>
-              </a>
-              <a href="/lifestyle" className="related-link">
-                <div className="related-card">
-                  <span className="related-icon">🌱</span>
-                  <h4>Lifestyle Guide</h4>
-                  <p>Ideal lifestyle and career paths for each MBTI type</p>
-                </div>
-              </a>
-              <a href="/about" className="related-link">
-                <div className="related-card">
-                  <span className="related-icon">📚</span>
-                  <h4>About MBTI</h4>
-                  <p>Deep understanding of MBTI theory and senior-focused insights</p>
-                </div>
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -512,13 +328,205 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SEO Content Section */}
+      <section className="seo-content-section">
+        <div className="container">
+          <div className="seo-content">
+            <h2 className="seo-content-title">Complete Guide to Senior MBTI Personality Type Test</h2>
+            
+            <div className="content-grid">
+              <div className="content-block">
+                <h3>💎 What is Senior MBTI?</h3>
+                <p>Senior MBTI is a personality type test specifically developed to reflect the unique life experiences and values of middle-aged adults aged 60 and above. Unlike general MBTI, it provides psychological analysis considering the special situations that seniors face, such as post-retirement life, health management, family relationships, and changes in social roles.</p>
+              </div>
+              
+              <div className="content-block">
+                <h3>🎯 A New Starting Point for Post-Retirement Life Planning</h3>
+                <p>Retirement is not the end of life but a new beginning. Through Senior MBTI, accurately identify your personality type and discover activities, hobbies, and relationships that can make your golden years more fulfilling. We provide customized lifestyle guides for middle-aged adults.</p>
+              </div>
+              
+              <div className="content-block">
+                <h3>💕 Scientific Basis of Senior Compatibility Analysis</h3>
+                <p>Personality analysis based on 60+ years of life experience is more accurate and in-depth. Senior MBTI helps you find the most compatible companions, friends, and activity partners. We provide reliable compatibility analysis based on scientifically validated psychological theories.</p>
+              </div>
+            </div>
+            
+            <div className="faq-section">
+              <h3 className="faq-title">Frequently Asked Questions (FAQ)</h3>
+              <div className="faq-list">
+                <div className="faq-item">
+                  <h4 className="faq-question">Q: Is the Senior MBTI test really free?</h4>
+                  <p className="faq-answer">A: Yes, it's completely free. You can take the test immediately without registration or payment, and all result analysis and compatibility information is provided free of charge.</p>
+                </div>
+                
+                <div className="faq-item">
+                  <h4 className="faq-question">Q: What's the difference between general MBTI and Senior MBTI?</h4>
+                  <p className="faq-answer">A: Senior MBTI considers the special life stages of 60+ middle-aged adults. It provides questions and interpretations that reflect seniors' unique situations such as retirement, health management, and family relationship changes.</p>
+                </div>
+                
+                <div className="faq-item">
+                  <h4 className="faq-question">Q: How long does the test take?</h4>
+                  <p className="faq-answer">A: It takes about 5 minutes. It consists of 24 simple questions that you can complete without any burden.</p>
+                </div>
+                
+                <div className="faq-item">
+                  <h4 className="faq-question">Q: How accurate are the results?</h4>
+                  <p className="faq-answer">A: It's a validated test co-developed by psychology experts and senior life specialists. Reliability has been confirmed through thousands of senior test participants.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MBTI Type Internal Links Section */}
+      <section className="internal-links-section">
+        <div className="container">
+          <div className="internal-links-header">
+            <h2 className="internal-links-title">
+              🔍 Explore 16 MBTI Personality Types
+            </h2>
+            <p className="internal-links-subtitle">
+              What characteristics do seniors with similar personalities have?
+            </p>
+          </div>
+          
+          <div className="mbti-grid">
+            <div className="mbti-category analyst">
+              <h3 className="category-title">💼 Analyst Group (NT)</h3>
+              <div className="mbti-types">
+                <a href="/result/intj" className="mbti-link intj">
+                  <span className="mbti-code">INTJ</span>
+                  <span className="mbti-name">The Architect</span>
+                  <span className="mbti-desc">Systematic thinking and independent living</span>
+                </a>
+                <a href="/result/intp" className="mbti-link intp">
+                  <span className="mbti-code">INTP</span>
+                  <span className="mbti-name">The Thinker</span>
+                  <span className="mbti-desc">Analytical thinking and intellectual curiosity</span>
+                </a>
+                <a href="/result/entj" className="mbti-link entj">
+                  <span className="mbti-code">ENTJ</span>
+                  <span className="mbti-name">The Commander</span>
+                  <span className="mbti-desc">Leadership and challenging spirit</span>
+                </a>
+                <a href="/result/entp" className="mbti-link entp">
+                  <span className="mbti-code">ENTP</span>
+                  <span className="mbti-name">The Debater</span>
+                  <span className="mbti-desc">Creative thinking and new challenges</span>
+                </a>
+              </div>
+            </div>
+            
+            <div className="mbti-category diplomat">
+              <h3 className="category-title">🌈 Diplomat Group (NF)</h3>
+              <div className="mbti-types">
+                <a href="/result/infj" className="mbti-link infj">
+                  <span className="mbti-code">INFJ</span>
+                  <span className="mbti-name">The Advocate</span>
+                  <span className="mbti-desc">Deep insight and meaningful relationships</span>
+                </a>
+                <a href="/result/infp" className="mbti-link infp">
+                  <span className="mbti-code">INFP</span>
+                  <span className="mbti-name">The Mediator</span>
+                  <span className="mbti-desc">True to values and free spirit</span>
+                </a>
+                <a href="/result/enfj" className="mbti-link enfj">
+                  <span className="mbti-code">ENFJ</span>
+                  <span className="mbti-name">The Protagonist</span>
+                  <span className="mbti-desc">Caring for others and social contribution</span>
+                </a>
+                <a href="/result/enfp" className="mbti-link enfp">
+                  <span className="mbti-code">ENFP</span>
+                  <span className="mbti-name">The Campaigner</span>
+                  <span className="mbti-desc">Passionate and positive energy</span>
+                </a>
+              </div>
+            </div>
+            
+            <div className="mbti-category sentinel">
+              <h3 className="category-title">🛡️ Sentinel Group (SJ)</h3>
+              <div className="mbti-types">
+                <a href="/result/istj" className="mbti-link istj">
+                  <span className="mbti-code">ISTJ</span>
+                  <span className="mbti-name">The Logistician</span>
+                  <span className="mbti-desc">Responsibility and systematic living</span>
+                </a>
+                <a href="/result/isfj" className="mbti-link isfj">
+                  <span className="mbti-code">ISFJ</span>
+                  <span className="mbti-name">The Defender</span>
+                  <span className="mbti-desc">Dedicated and warm care</span>
+                </a>
+                <a href="/result/estj" className="mbti-link estj">
+                  <span className="mbti-code">ESTJ</span>
+                  <span className="mbti-name">The Executive</span>
+                  <span className="mbti-desc">Efficiency and organizational skills</span>
+                </a>
+                <a href="/result/esfj" className="mbti-link esfj">
+                  <span className="mbti-code">ESFJ</span>
+                  <span className="mbti-name">The Consul</span>
+                  <span className="mbti-desc">Warm sociability and care</span>
+                </a>
+              </div>
+            </div>
+            
+            <div className="mbti-category explorer">
+              <h3 className="category-title">🎭 Explorer Group (SP)</h3>
+              <div className="mbti-types">
+                <a href="/result/istp" className="mbti-link istp">
+                  <span className="mbti-code">ISTP</span>
+                  <span className="mbti-name">The Virtuoso</span>
+                  <span className="mbti-desc">Practical and logical approach</span>
+                </a>
+                <a href="/result/isfp" className="mbti-link isfp">
+                  <span className="mbti-code">ISFP</span>
+                  <span className="mbti-name">The Adventurer</span>
+                  <span className="mbti-desc">Artistic sense and free spirit</span>
+                </a>
+                <a href="/result/estp" className="mbti-link estp">
+                  <span className="mbti-code">ESTP</span>
+                  <span className="mbti-name">The Entrepreneur</span>
+                  <span className="mbti-desc">Enjoying the present and active life</span>
+                </a>
+                <a href="/result/esfp" className="mbti-link esfp">
+                  <span className="mbti-code">ESFP</span>
+                  <span className="mbti-name">The Entertainer</span>
+                  <span className="mbti-desc">Enjoying fun and social activities</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="related-links">
+            <h3 className="related-title">Senior Life Related Information</h3>
+            <div className="related-grid">
+              <a href="/mbti-compatibility" className="related-link">
+                <span className="related-icon">💕</span>
+                <span className="related-text">MBTI Compatibility Analysis Guide</span>
+              </a>
+              <a href="/senior-lifestyle" className="related-link">
+                <span className="related-icon">🌿</span>
+                <span className="related-text">Senior Lifestyle Tips</span>
+              </a>
+              <a href="/retirement-planning" className="related-link">
+                <span className="related-icon">🏡</span>
+                <span className="related-text">Post-Retirement Life Planning</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="final-cta-section">
         <div className="container">
           <div className="final-cta-content">
             <h2 className="final-cta-title">
-              {t('landing.closing')}
+              Start Right Now! Your Personal Senior MBTI Journey
             </h2>
+            <p className="final-cta-description">
+              Get a free personality analysis that will make your 60+ golden years even more fulfilling
+            </p>
             <button
               onClick={handleStartTest}
               disabled={isStarting}
@@ -526,9 +534,15 @@ export default function HomePage() {
             >
               <span className="final-cta-icon">✨</span>
               <span className="final-cta-text">
-                {isStarting ? t('landing.starting') : t('landing.start')}
+                {isStarting ? 'Starting test...' : 'Start Free Senior MBTI Test'}
               </span>
             </button>
+            <div className="final-guarantees">
+              <span className="guarantee-item">✅ Completely Free</span>
+              <span className="guarantee-item">✅ 2 Min Complete</span>
+              <span className="guarantee-item">✅ Instant Results</span>
+              <span className="guarantee-item">✅ Privacy Protected</span>
+            </div>
           </div>
         </div>
       </section>
@@ -926,6 +940,140 @@ export default function HomePage() {
           line-height: 1.5;
         }
 
+        /* SEO Header */
+        .seo-header {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .visually-hidden {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+
+        /* SEO Benefits */
+        .seo-benefits {
+          margin-top: 40px;
+          padding: 32px;
+          background: rgba(102, 126, 234, 0.05);
+          border-radius: 16px;
+          border-left: 4px solid #667eea;
+        }
+
+        .seo-benefits-title {
+          font-size: 24px;
+          font-weight: 700;
+          color: #1F2937;
+          margin-bottom: 20px;
+        }
+
+        .benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .benefits-list li {
+          font-size: 16px;
+          color: #374151;
+          margin-bottom: 12px;
+          line-height: 1.6;
+        }
+
+        /* SEO Content Section */
+        .seo-content-section {
+          background: #F8FAFC;
+          padding: 100px 0;
+        }
+
+        .seo-content-title {
+          font-size: clamp(2rem, 5vw, 3rem);
+          font-weight: 800;
+          color: #1F2937;
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .content-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 40px;
+          margin-bottom: 80px;
+        }
+
+        .content-block {
+          background: white;
+          padding: 32px;
+          border-radius: 16px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          border-left: 4px solid #667eea;
+        }
+
+        .content-block h3 {
+          font-size: 24px;
+          font-weight: 700;
+          color: #1F2937;
+          margin-bottom: 16px;
+        }
+
+        .content-block p {
+          font-size: 16px;
+          color: #374151;
+          line-height: 1.7;
+          margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+          background: white;
+          padding: 40px;
+          border-radius: 16px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-title {
+          font-size: 32px;
+          font-weight: 800;
+          color: #1F2937;
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .faq-list {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .faq-item {
+          padding: 24px;
+          background: #F8FAFC;
+          border-radius: 12px;
+          border-left: 4px solid #667eea;
+        }
+
+        .faq-question {
+          font-size: 18px;
+          font-weight: 700;
+          color: #1F2937;
+          margin-bottom: 12px;
+        }
+
+        .faq-answer {
+          font-size: 16px;
+          color: #374151;
+          line-height: 1.6;
+          margin: 0;
+        }
+
         /* Final CTA Section */
         .final-cta-section {
           background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
@@ -937,8 +1085,29 @@ export default function HomePage() {
           font-size: clamp(1.5rem, 4vw, 2.5rem);
           font-weight: 700;
           color: white;
-          margin: 0 0 40px 0;
+          margin: 0 0 20px 0;
           line-height: 1.3;
+        }
+
+        .final-cta-description {
+          font-size: 20px;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 40px;
+          line-height: 1.5;
+        }
+
+        .final-guarantees {
+          display: flex;
+          justify-content: center;
+          gap: 24px;
+          margin-top: 24px;
+          flex-wrap: wrap;
+        }
+
+        .guarantee-item {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 600;
         }
 
         .final-cta-button {
@@ -1262,28 +1431,63 @@ export default function HomePage() {
             font-size: 24px;
             margin-bottom: 0;
           }
+
+          /* SEO Content Mobile */
+          .seo-content-section {
+            padding: 60px 0;
+          }
+
+          .content-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 60px;
+          }
+
+          .content-block {
+            padding: 24px;
+          }
+
+          .faq-section {
+            padding: 24px;
+          }
+
+          .faq-item {
+            padding: 20px;
+          }
+
+          .final-guarantees {
+            gap: 12px;
+          }
+
+          .benefits-list li {
+            font-size: 14px;
+          }
+
+          .seo-benefits {
+            padding: 24px;
+          }
         }
 
-        /* MBTI Types Section */
-        .mbti-types-section {
-          background: white;
+        /* 내부 링크 섹션 */
+        .internal-links-section {
+          background: #F8FAFC;
           padding: 100px 0;
         }
 
-        .types-header {
+        .internal-links-header {
           text-align: center;
-          margin-bottom: 80px;
+          margin-bottom: 60px;
         }
 
-        .types-title {
+        .internal-links-title {
           font-size: clamp(2rem, 5vw, 3rem);
           font-weight: 800;
           color: #1F2937;
           margin-bottom: 16px;
         }
 
-        .types-subtitle {
-          font-size: clamp(1rem, 3vw, 1.25rem);
+        .internal-links-subtitle {
+          font-size: 18px;
           color: #6B7280;
           margin: 0;
           line-height: 1.6;
@@ -1291,95 +1495,93 @@ export default function HomePage() {
 
         .mbti-grid {
           display: grid;
-          gap: 60px;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
           margin-bottom: 80px;
         }
 
-        .mbti-group {
-          background: #F8FAFC;
-          border-radius: 24px;
-          padding: 40px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-          border: 1px solid #E5E7EB;
-        }
-
-        .nt-group { border-top: 4px solid #8B5CF6; }
-        .nf-group { border-top: 4px solid #EF4444; }
-        .sj-group { border-top: 4px solid #10B981; }
-        .sp-group { border-top: 4px solid #F59E0B; }
-
-        .group-title {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          font-size: 28px;
-          font-weight: 700;
-          color: #1F2937;
-          margin-bottom: 12px;
-        }
-
-        .group-icon {
-          font-size: 32px;
-        }
-
-        .group-description {
-          font-size: 16px;
-          color: #6B7280;
-          margin-bottom: 32px;
-          text-align: left;
-        }
-
-        .types-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-        }
-
-        .type-link {
-          text-decoration: none;
-          display: block;
-          transition: transform 0.3s ease;
-        }
-
-        .type-link:hover {
-          transform: translateY(-4px);
-        }
-
-        .type-card {
+        .mbti-category {
           background: white;
-          border-radius: 16px;
-          padding: 24px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+          padding: 32px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
           border: 1px solid #E5E7EB;
-          text-align: center;
           transition: all 0.3s ease;
         }
 
-        .type-card:hover {
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-          border-color: #9CA3AF;
+        .mbti-category:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         }
 
-        .type-code {
-          font-size: 24px;
+        .mbti-category.analyst {
+          border-top: 4px solid #8B5CF6;
+        }
+
+        .mbti-category.diplomat {
+          border-top: 4px solid #F59E0B;
+        }
+
+        .mbti-category.sentinel {
+          border-top: 4px solid #3B82F6;
+        }
+
+        .mbti-category.explorer {
+          border-top: 4px solid #10B981;
+        }
+
+        .category-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: #1F2937;
+          margin-bottom: 24px;
+          text-align: center;
+        }
+
+        .mbti-types {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .mbti-link {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 16px;
+          background: #F8FAFC;
+          border: 1px solid #E5E7EB;
+          border-radius: 12px;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          color: inherit;
+        }
+
+        .mbti-link:hover {
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+          border-color: #667eea;
+          transform: translateX(4px);
+        }
+
+        .mbti-code {
+          font-size: 18px;
           font-weight: 900;
           background: linear-gradient(135deg, #667eea, #764ba2);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          margin-bottom: 8px;
+          background-clip: text;
         }
 
-        .type-name {
-          font-size: 18px;
+        .mbti-name {
+          font-size: 14px;
           font-weight: 600;
           color: #374151;
-          margin-bottom: 12px;
         }
 
-        .type-traits {
-          font-size: 14px;
+        .mbti-desc {
+          font-size: 12px;
           color: #6B7280;
-          line-height: 1.5;
+          line-height: 1.4;
         }
 
         .related-links {
@@ -1390,96 +1592,74 @@ export default function HomePage() {
           font-size: 28px;
           font-weight: 700;
           color: #1F2937;
-          margin-bottom: 40px;
+          margin-bottom: 32px;
         }
 
         .related-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 32px;
-          max-width: 1000px;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 24px;
+          max-width: 800px;
           margin: 0 auto;
         }
 
         .related-link {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 24px;
+          background: white;
+          border: 2px solid #E5E7EB;
+          border-radius: 16px;
           text-decoration: none;
-          display: block;
-          transition: transform 0.3s ease;
+          color: inherit;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .related-link:hover {
-          transform: translateY(-4px);
-        }
-
-        .related-card {
-          background: white;
-          border-radius: 20px;
-          padding: 32px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-          border: 1px solid #E5E7EB;
-          text-align: center;
-          transition: all 0.3s ease;
-        }
-
-        .related-card:hover {
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          border-color: #667eea;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
         }
 
         .related-icon {
-          font-size: 48px;
-          margin-bottom: 16px;
-          display: block;
+          font-size: 24px;
+          flex-shrink: 0;
         }
 
-        .related-card h4 {
-          font-size: 20px;
+        .related-text {
+          font-size: 16px;
           font-weight: 600;
-          color: #1F2937;
-          margin-bottom: 12px;
+          color: #374151;
         }
 
-        .related-card p {
-          font-size: 14px;
-          color: #6B7280;
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        /* Mobile responsiveness for MBTI Types Section */
+        /* 내부 링크 모바일 반응형 */
         @media (max-width: 768px) {
-          .mbti-types-section {
+          .internal-links-section {
             padding: 60px 0;
           }
 
           .mbti-grid {
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 24px;
             margin-bottom: 60px;
           }
 
-          .mbti-group {
+          .mbti-category {
             padding: 24px;
-          }
-
-          .group-title {
-            font-size: 24px;
-          }
-
-          .types-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-          }
-
-          .type-card {
-            padding: 20px;
           }
 
           .related-grid {
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 16px;
           }
 
-          .related-card {
-            padding: 24px;
+          .related-link {
+            padding: 20px;
+            flex-direction: column;
+            text-align: center;
+            gap: 12px;
           }
         }
 
@@ -1492,7 +1672,8 @@ export default function HomePage() {
           .final-cta-button,
           .example-card,
           .showcase-cta-button,
-          .type-link,
+          .mbti-category,
+          .mbti-link,
           .related-link {
             animation: none;
             transition: none;
