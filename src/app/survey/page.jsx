@@ -259,9 +259,13 @@ export default function SurveyPage() {
     setAnswers(newAnswers);
     setSelectedChoice(null);
 
+    console.log(`Current Question: ${currentQuestion + 1}, Total Questions: ${questions.length}`);
+    console.log(`New Answers Length: ${newAnswers.length}`);
+
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+      console.log('Last question completed, calling calculateAndRedirect with answers:', newAnswers);
       calculateAndRedirect(newAnswers);
     }
   };
@@ -276,6 +280,7 @@ export default function SurveyPage() {
   };
 
   const calculateAndRedirect = async (finalAnswers) => {
+    console.log('calculateAndRedirect called with answers:', finalAnswers);
     setIsSubmitting(true);
     
     try {
@@ -289,11 +294,15 @@ export default function SurveyPage() {
         scores[answer.type]++;
       });
 
+      console.log('Calculated scores:', scores);
+
       const mbtiType = 
         (scores.E > scores.I ? 'E' : 'I') +
         (scores.S > scores.N ? 'S' : 'N') +
         (scores.T > scores.F ? 'T' : 'F') +
         (scores.J > scores.P ? 'J' : 'P');
+
+      console.log('Calculated MBTI Type:', mbtiType);
 
       // MBTI type validation
       const validTypes = ['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 
@@ -310,6 +319,8 @@ export default function SurveyPage() {
         };
         
         localStorage.setItem(`mbti-result-${mbtiType}`, JSON.stringify(resultData));
+        
+        console.log('About to redirect to:', `/result/${mbtiType.toLowerCase()}`);
         
         // Additional delay for stable navigation
         await new Promise(resolve => setTimeout(resolve, 200));
