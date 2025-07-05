@@ -262,7 +262,7 @@ export default function SurveyPage() {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      handleSubmit(newAnswers);
+      calculateAndRedirect(newAnswers);
     }
   };
 
@@ -275,10 +275,13 @@ export default function SurveyPage() {
     }
   };
 
-  const handleSubmit = async (finalAnswers) => {
+  const calculateAndRedirect = async (finalAnswers) => {
     setIsSubmitting(true);
     
     try {
+      // State update delay for completion
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
       // Calculate MBTI type
       const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
       
@@ -292,25 +295,30 @@ export default function SurveyPage() {
         (scores.T > scores.F ? 'T' : 'F') +
         (scores.J > scores.P ? 'J' : 'P');
 
-      // Generate result ID
-      const resultId = Date.now().toString();
+      // MBTI type validation
+      const validTypes = ['INTJ', 'INTP', 'ENTJ', 'ENTP', 'INFJ', 'INFP', 'ENFJ', 'ENFP', 
+                         'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
       
-      // Save to localStorage
-      const resultData = {
-        mbtiType,
-        scores,
-        answers: finalAnswers,
-        completedAt: new Date().toISOString(),
-        language: 'en'
-      };
-      
-      localStorage.setItem(`mbti-result-${resultId}`, JSON.stringify(resultData));
-      
-      // Auto redirect to result page after 2 seconds
-      setTimeout(() => {
-        router.push(`/result/${resultId}`);
-      }, 2000);
-      
+      if (validTypes.includes(mbtiType)) {
+        // Save to localStorage for backup
+        const resultData = {
+          mbtiType,
+          scores,
+          answers: finalAnswers,
+          completedAt: new Date().toISOString(),
+          language: 'en'
+        };
+        
+        localStorage.setItem(`mbti-result-${mbtiType}`, JSON.stringify(resultData));
+        
+        // Additional delay for stable navigation
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        // Use replace to prevent back navigation issues
+        router.replace(`/result/${mbtiType.toLowerCase()}`);
+      } else {
+        throw new Error(`Invalid MBTI type calculated: ${mbtiType}`);
+      }
     } catch (error) {
       console.error('Error calculating results:', error);
       alert('An error occurred while calculating results. Please try again.');
