@@ -330,11 +330,18 @@ export default function SurveyPage() {
         
         console.log('About to redirect to:', `/result/${mbtiType.toLowerCase()}`);
         
-        // Additional delay for stable navigation
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Display completion message and auto-redirect after 2 seconds
+        await new Promise(resolve => setTimeout(resolve, 2000));
         
-        // Use window.location for more reliable redirection
-        window.location.href = `/result/${mbtiType.toLowerCase()}`;
+        // Use Next.js router for reliable redirection
+        router.push(`/result/${mbtiType.toLowerCase()}`);
+        
+        // Backup redirection if router.push fails
+        setTimeout(() => {
+          if (typeof window !== 'undefined') {
+            window.location.href = `/result/${mbtiType.toLowerCase()}`;
+          }
+        }, 500);
         
       } else {
         throw new Error(`Invalid MBTI type calculated: ${mbtiType}`);
