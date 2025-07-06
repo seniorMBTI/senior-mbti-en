@@ -522,7 +522,9 @@ export default function ResultPage() {
     );
   }
 
-  const typeInfo = mbtiTypes[resultData?.mbtiType] || mbtiTypes['INTJ'];
+  // Get MBTI type from URL parameter for server-side compatibility  
+  const mbtiTypeFromUrl = params.type?.toUpperCase();
+  const typeInfo = mbtiTypes[mbtiTypeFromUrl] || mbtiTypes[resultData?.mbtiType] || mbtiTypes['INTJ'];
 
   return (
     <>
@@ -634,10 +636,10 @@ export default function ResultPage() {
               <p>Types with whom you can build deep and meaningful relationships</p>
             </div>
             <div className="card-content">
-              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.bestMatch.map((type, index) => (
+              {typeInfo?.type && mbtiCompatibility[typeInfo.type]?.bestMatch?.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
-                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title || type}</span>
                 </div>
               ))}
             </div>
@@ -650,10 +652,10 @@ export default function ResultPage() {
               <p>Types with whom you can maintain comfortable and stable relationships</p>
             </div>
             <div className="card-content">
-              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.goodMatch.map((type, index) => (
+              {typeInfo?.type && mbtiCompatibility[typeInfo.type]?.goodMatch?.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
-                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title || type}</span>
                 </div>
               ))}
             </div>
@@ -666,10 +668,10 @@ export default function ResultPage() {
               <p>Types requiring significant effort and understanding to maintain harmony</p>
             </div>
             <div className="card-content">
-              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.challengingMatch.map((type, index) => (
+              {typeInfo?.type && mbtiCompatibility[typeInfo.type]?.challengingMatch?.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
-                  <span className="type-name">{mbtiTypes[type]?.title}</span>
+                  <span className="type-name">{mbtiTypes[type]?.title || type}</span>
                 </div>
               ))}
             </div>
