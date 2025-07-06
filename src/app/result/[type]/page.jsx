@@ -491,7 +491,7 @@ export default function ResultPage() {
         updateMetaTag('og:title', `${mbtiType} ${mbtiInfo.title} - Senior MBTI Result`);
         updateMetaTag('og:description', `Your MBTI is ${mbtiType} ${mbtiInfo.title}. ${mbtiInfo.subtitle} ${mbtiInfo.description.substring(0, 100)}...`);
         updateMetaTag('og:image', `https://seniormbti.com/${mbtiType}-en.png`);
-        updateMetaTag('og:url', window.location.href);
+        updateMetaTag('og:url', `https://seniormbti.com/result/${mbtiType.toLowerCase()}`);
         updateMetaTag('og:type', 'website');
         
         updateNameMetaTag('description', `Your MBTI is ${mbtiType} ${mbtiInfo.title}. ${mbtiInfo.subtitle} ${mbtiInfo.description.substring(0, 100)}...`);
@@ -517,7 +517,7 @@ export default function ResultPage() {
   };
 
   const handleShareClick = () => {
-    if (shareButtonRef.current) {
+    if (shareButtonRef.current && typeof window !== 'undefined') {
       const rect = shareButtonRef.current.getBoundingClientRect();
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
