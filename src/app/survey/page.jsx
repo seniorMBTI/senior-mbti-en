@@ -284,9 +284,11 @@ export default function SurveyPage() {
     setIsSubmitting(true);
     
     try {
-      // State update delay for completion
-      await new Promise(resolve => setTimeout(resolve, 100));
-      
+      // Ensure this runs only on client side
+      if (typeof window === 'undefined') {
+        throw new Error('Client-side only function called on server');
+      }
+
       // Calculate MBTI type
       const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
       
@@ -309,31 +311,46 @@ export default function SurveyPage() {
                          'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
       
       if (validTypes.includes(mbtiType)) {
-        // Save to localStorage for backup
-        const resultData = {
-          mbtiType,
-          scores,
-          answers: finalAnswers,
-          completedAt: new Date().toISOString(),
-          language: 'en'
-        };
-        
-        localStorage.setItem(`mbti-result-${mbtiType}`, JSON.stringify(resultData));
+        // Save to localStorage safely
+        try {
+          const resultData = {
+            mbtiType,
+            scores,
+            answers: finalAnswers,
+            completedAt: new Date().toISOString(),
+            language: 'en'
+          };
+          
+          localStorage.setItem(`mbti-result-${mbtiType}`, JSON.stringify(resultData));
+          console.log('Result data saved to localStorage');
+        } catch (storageError) {
+          console.warn('Failed to save to localStorage:', storageError);
+          // Continue even if localStorage fails
+        }
         
         console.log('About to redirect to:', `/result/${mbtiType.toLowerCase()}`);
         
         // Additional delay for stable navigation
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 300));
         
-        // Use replace to prevent back navigation issues
-        router.replace(`/result/${mbtiType.toLowerCase()}`);
+        // Use window.location for more reliable redirection
+        window.location.href = `/result/${mbtiType.toLowerCase()}`;
+        
       } else {
         throw new Error(`Invalid MBTI type calculated: ${mbtiType}`);
       }
+      
     } catch (error) {
       console.error('Error calculating results:', error);
       alert('An error occurred while calculating results. Please try again.');
       setIsSubmitting(false);
+      
+      // Redirect to home on error
+      if (typeof window !== 'undefined') {
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
+      }
     }
   };
 
