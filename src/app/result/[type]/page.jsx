@@ -342,8 +342,14 @@ export default function ResultPage() {
   const shareButtonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: '50%', left: '50%' });
 
+  // Client mount state setting
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Data processing after mount completion
+  useEffect(() => {
+    if (!mounted) return; // Execute only on client side
     
     // Get MBTI type directly from URL parameter
     const mbtiType = params.type?.toUpperCase();
@@ -356,22 +362,38 @@ export default function ResultPage() {
       
       if (validTypes.includes(mbtiType)) {
         console.log('Valid MBTI Type, setting result data:', mbtiType);
+        
+        // Check existing results from localStorage (client-side only)
+        let storedResult = null;
+        try {
+          if (typeof window !== 'undefined') {
+            storedResult = localStorage.getItem(`mbti-result-${mbtiType}`);
+            if (storedResult) {
+              storedResult = JSON.parse(storedResult);
+            }
+          }
+        } catch (error) {
+          console.warn('Error reading localStorage:', error);
+        }
+        
         // Create result data from MBTI type parameter
         setResultData({
           mbtiType: mbtiType,
-          timestamp: Date.now(),
-          isDirectLink: true
+          timestamp: storedResult?.timestamp || Date.now(),
+          isDirectLink: true,
+          scores: storedResult?.scores || null,
+          answers: storedResult?.answers || null
         });
-      } else if (mounted) {
+      } else {
         console.log('Invalid MBTI Type, redirecting to home');
         // Redirect to home if invalid MBTI type
         router.push('/');
       }
-    } else if (mounted) {
+    } else {
       console.log('No MBTI Type in URL, redirecting to home');
       router.push('/');
     }
-  }, [params.type, router, mounted]);
+  }, [mounted, params.type, router]);
 
   // Dynamic meta tags update based on MBTI result
   useEffect(() => {
