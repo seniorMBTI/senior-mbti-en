@@ -445,16 +445,16 @@ export default function ResultPage() {
           timestamp: Date.now(),
           isDirectLink: true
         });
-      } else {
+      } else if (mounted) {
         console.log('Invalid MBTI Type, redirecting to home');
         // Redirect to home if invalid MBTI type
         router.push('/');
       }
-    } else {
+    } else if (mounted) {
       console.log('No MBTI Type in URL, redirecting to home');
       router.push('/');
     }
-  }, [params.type, router]);
+  }, [params.type, router, mounted]);
 
   // Dynamic meta tags update based on MBTI result
   useEffect(() => {
