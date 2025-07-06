@@ -56,7 +56,7 @@ export async function generateMetadata({ params }) {
       siteName: 'Senior MBTI',
       images: [
         {
-          url: '/en.png',
+          url: `/${resultId}-en.png`,
           width: 1200,
           height: 630,
           alt: `${resultId} Personality Type Result - Senior MBTI`
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title: `Senior MBTI Result - ${resultId} Type`,
       description: `${resultId} personality type detailed analysis results. Discover compatible and challenging MBTI types for meaningful relationships.`,
-      images: ['/en.png']
+      images: [`/${resultId}-en.png`]
     },
     robots: {
       index: true,
