@@ -335,25 +335,16 @@ const mbtiTypes = {
 export default function ResultPage() {
   const params = useParams();
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
   const [resultData, setResultData] = useState(null);
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [showCopySuccess, setShowCopySuccess] = useState(false);
   const shareButtonRef = useRef(null);
   const [modalPosition, setModalPosition] = useState({ top: '50%', left: '50%' });
 
-  // Client mount state setting
+  // Server-side compatible data processing
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Data processing after mount completion
-  useEffect(() => {
-    if (!mounted) return; // Execute only on client side
-    
     // Get MBTI type directly from URL parameter
     const mbtiType = params.type?.toUpperCase();
-    console.log('URL MBTI Type:', mbtiType);
     
     if (mbtiType) {
       // Check if it's a valid MBTI type
@@ -361,8 +352,6 @@ export default function ResultPage() {
                          'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ', 'ISTP', 'ISFP', 'ESTP', 'ESFP'];
       
       if (validTypes.includes(mbtiType)) {
-        console.log('Valid MBTI Type, setting result data:', mbtiType);
-        
         // Check existing results from localStorage (client-side only)
         let storedResult = null;
         try {
@@ -385,19 +374,17 @@ export default function ResultPage() {
           answers: storedResult?.answers || null
         });
       } else {
-        console.log('Invalid MBTI Type, redirecting to home');
         // Redirect to home if invalid MBTI type
         router.push('/');
       }
     } else {
-      console.log('No MBTI Type in URL, redirecting to home');
       router.push('/');
     }
-  }, [mounted, params.type, router]);
+  }, [params.type, router]);
 
-  // Dynamic meta tags update based on MBTI result
+  // Client-side meta tag update (server-side compatible)
   useEffect(() => {
-    if (resultData && mounted) {
+    if (resultData && typeof window !== 'undefined') {
       const mbtiType = resultData.mbtiType;
       const mbtiInfo = mbtiTypes[mbtiType];
       
@@ -405,32 +392,40 @@ export default function ResultPage() {
         // Update page title
         document.title = `${mbtiType} ${mbtiInfo.title} - Senior MBTI Result`;
         
-        // Update Open Graph meta tags
+        // Meta tag update functions
         const updateMetaTag = (property, content) => {
-          let meta = document.querySelector(`meta[property="${property}"]`);
-          if (!meta) {
-            meta = document.createElement('meta');
-            meta.setAttribute('property', property);
-            document.head.appendChild(meta);
+          try {
+            let meta = document.querySelector(`meta[property="${property}"]`);
+            if (!meta) {
+              meta = document.createElement('meta');
+              meta.setAttribute('property', property);
+              document.head.appendChild(meta);
+            }
+            meta.setAttribute('content', content);
+          } catch (error) {
+            console.warn('Meta tag update failed:', error);
           }
-          meta.setAttribute('content', content);
         };
 
         const updateNameMetaTag = (name, content) => {
-          let meta = document.querySelector(`meta[name="${name}"]`);
-          if (!meta) {
-            meta = document.createElement('meta');
-            meta.setAttribute('name', name);
-            document.head.appendChild(meta);
+          try {
+            let meta = document.querySelector(`meta[name="${name}"]`);
+            if (!meta) {
+              meta = document.createElement('meta');
+              meta.setAttribute('name', name);
+              document.head.appendChild(meta);
+            }
+            meta.setAttribute('content', content);
+          } catch (error) {
+            console.warn('Name meta tag update failed:', error);
           }
-          meta.setAttribute('content', content);
         };
 
-        // Update meta tags with MBTI-specific images using production domain
+        // Update meta tags with MBTI-specific content
         updateMetaTag('og:title', `${mbtiType} ${mbtiInfo.title} - Senior MBTI Result`);
         updateMetaTag('og:description', `Your MBTI is ${mbtiType} ${mbtiInfo.title}. ${mbtiInfo.subtitle} ${mbtiInfo.description.substring(0, 100)}...`);
         updateMetaTag('og:image', `https://seniormbti.com/${mbtiType}-en.png`);
-        updateMetaTag('og:url', `https://seniormbti.com/result/${mbtiType.toLowerCase()}`);
+        updateMetaTag('og:url', window.location.href);
         updateMetaTag('og:type', 'website');
         
         updateNameMetaTag('description', `Your MBTI is ${mbtiType} ${mbtiInfo.title}. ${mbtiInfo.subtitle} ${mbtiInfo.description.substring(0, 100)}...`);
@@ -440,10 +435,10 @@ export default function ResultPage() {
         updateNameMetaTag('twitter:card', 'summary_large_image');
       }
     }
-  }, [resultData, mounted]);
+  }, [resultData]);
 
   const copyResultLink = () => {
-    if (mounted && typeof window !== 'undefined' && resultData) {
+    if (typeof window !== 'undefined' && resultData) {
       // Use clean MBTI type URL for sharing
       const shareUrl = `${window.location.origin}/result/${resultData.mbtiType.toLowerCase()}`;
       navigator.clipboard.writeText(shareUrl);
@@ -491,7 +486,7 @@ export default function ResultPage() {
     setShowShareDialog(true);
   };
 
-  if (!mounted || !resultData) {
+  if (!resultData) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
