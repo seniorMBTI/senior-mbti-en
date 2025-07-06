@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
       description: `${resultId} personality type detailed analysis results. Discover compatible and challenging MBTI types for meaningful relationships.`,
       type: 'website',
       locale: 'en_US',
-      url: `https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app/result/${resultId}`,
+      url: `https://seniormbti.com/result/${resultId}`,
       siteName: 'Senior MBTI',
       images: [
         {
@@ -115,7 +115,7 @@ export default function ResultLayout({ children, params }) {
             "provider": {
               "@type": "Organization",
               "name": "Senior MBTI Research Team",
-              "url": "https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app"
+              "url": "https://seniormbti.com"
             },
             "datePublished": new Date().toISOString(),
             "inLanguage": "en-US",
@@ -136,19 +136,19 @@ export default function ResultLayout({ children, params }) {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Senior MBTI Home",
-                "item": "https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app"
+                "item": "https://seniormbti.com"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Personality Test Survey",
-                "item": "https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app/survey"
+                "item": "https://seniormbti.com/survey"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": `${resultId} Type Result`,
-                "item": `https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app/result/${resultId.toLowerCase()}`
+                "item": `https://seniormbti.com/result/${resultId.toLowerCase()}`
               }
             ]
           })

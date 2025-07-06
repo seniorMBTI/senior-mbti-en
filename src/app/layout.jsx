@@ -16,7 +16,7 @@ export const metadata = {
     description: 'Discover your MBTI and find compatible personality types! Identify people with compatible personalities who will make great companions for the rest of your life journey.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app',
+    url: 'https://seniormbti.com',
     siteName: 'Senior MBTI',
     images: [
       {
@@ -85,11 +85,11 @@ export default function RootLayout({ children }) {
         <meta name="bingbot" content="index, follow" />
         
         {/* Multilingual SEO optimization */}
-        <link rel="alternate" hrefLang="en" href="https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app/" />
-        <link rel="alternate" hrefLang="ko" href="https://senior-mbti-qwnq47jj8-seniormbtis-projects.vercel.app/" />
-        <link rel="alternate" hrefLang="zh" href="https://senior-mbti-k71r0f94e-seniormbtis-projects.vercel.app/" />
-        <link rel="alternate" hrefLang="ja" href="https://senior-mbti-nkth90d1y-seniormbtis-projects.vercel.app/" />
-        <link rel="alternate" hrefLang="x-default" href="https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app/" />
+        <link rel="alternate" hrefLang="en" href="https://seniormbti.com/" />
+        <link rel="alternate" hrefLang="ko" href="https://kr.seniormbti.com/" />
+        <link rel="alternate" hrefLang="zh" href="https://cn.seniormbti.com/" />
+        <link rel="alternate" hrefLang="ja" href="https://jp.seniormbti.com/" />
+        <link rel="alternate" hrefLang="x-default" href="https://seniormbti.com/" />
         
         {/* Performance optimization */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
               "name": "Senior MBTI",
               "alternateName": "Elderly Personality Type Test",
               "description": "Professional MBTI personality type test designed for seniors 60+. Retirement life planning and relationship improvement through psychological analysis.",
-              "url": "https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app",
+              "url": "https://seniormbti.com",
               "applicationCategory": "LifestyleApplication",
               "operatingSystem": "Web Browser",
               "offers": {
@@ -119,7 +119,7 @@ export default function RootLayout({ children }) {
               "provider": {
                 "@type": "Organization",
                 "name": "Senior MBTI Expert Team",
-                "url": "https://senior-mbti-l3zee5a4g-seniormbtis-projects.vercel.app"
+                "url": "https://seniormbti.com"
               },
               "audience": {
                 "@type": "Audience",
