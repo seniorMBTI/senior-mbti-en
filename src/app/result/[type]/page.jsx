@@ -700,7 +700,7 @@ export default function ResultPage() {
               <p>Types with whom you can build deep and meaningful relationships</p>
             </div>
             <div className="card-content">
-              {mbtiCompatibility[resultData.mbtiType]?.bestMatch.map((type, index) => (
+              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.bestMatch.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
                   <span className="type-name">{mbtiTypes[type]?.title}</span>
@@ -716,7 +716,7 @@ export default function ResultPage() {
               <p>Types with whom you can maintain comfortable and stable relationships</p>
             </div>
             <div className="card-content">
-              {mbtiCompatibility[resultData.mbtiType]?.goodMatch.map((type, index) => (
+              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.goodMatch.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
                   <span className="type-name">{mbtiTypes[type]?.title}</span>
@@ -732,7 +732,7 @@ export default function ResultPage() {
               <p>Types requiring significant effort and understanding to maintain harmony</p>
             </div>
             <div className="card-content">
-              {mbtiCompatibility[resultData.mbtiType]?.challengingMatch.map((type, index) => (
+              {resultData?.mbtiType && mbtiCompatibility[resultData.mbtiType]?.challengingMatch.map((type, index) => (
                 <div key={index} className="compatibility-item">
                   <span className="type-badge-small">{type}</span>
                   <span className="type-name">{mbtiTypes[type]?.title}</span>
