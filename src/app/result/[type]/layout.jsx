@@ -39,7 +39,7 @@ const mbtiDescriptions = {
 };
 
 export async function generateMetadata({ params }) {
-  const resultId = params.id.toUpperCase();
+  const resultId = params.type.toUpperCase();
   const keywords = mbtiKeywords[resultId] || `${resultId}, MBTI result, Senior MBTI, personality type, MBTI compatibility, golden years`;
   const description = mbtiDescriptions[resultId] || `Detailed analysis results for ${resultId} personality type. Discover compatible and challenging MBTI types and find your ideal life companions for the golden years ahead.`;
   
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default function ResultLayout({ children, params }) {
-  const resultId = params.id.toUpperCase();
+  const resultId = params.type.toUpperCase();
   
   return (
     <>
