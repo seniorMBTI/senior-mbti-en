@@ -20,7 +20,7 @@ export const metadata = {
     siteName: 'Senior MBTI',
     images: [
       {
-        url: '/en.png',
+        url: 'https://seniormbti.com/en.png',
         width: 1200,
         height: 630,
         alt: 'Senior MBTI Personality Test - Discover Your MBTI & Compatible Types'
@@ -31,7 +31,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Senior MBTI - Discover Your MBTI & Compatible Types',
     description: 'Discover your MBTI and find compatible personality types! Identify people with compatible personalities who will make great companions for the rest of your life journey.',
-    images: ['/en.png']
+    images: ['https://seniormbti.com/en.png']
   },
   robots: {
     index: true,
