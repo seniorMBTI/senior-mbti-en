@@ -17,21 +17,12 @@ export const metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://seniormbti.com',
-    siteName: 'Senior MBTI',
-    images: [
-      {
-        url: 'https://seniormbti.com/en.png',
-        width: 1200,
-        height: 630,
-        alt: 'Senior MBTI Personality Test - Discover Your MBTI & Compatible Types'
-      }
-    ]
+    siteName: 'Senior MBTI'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Senior MBTI - Discover Your MBTI & Compatible Types',
-    description: 'Discover your MBTI and find compatible personality types! Identify people with compatible personalities who will make great companions for the rest of your life journey.',
-    images: ['https://seniormbti.com/en.png']
+    description: 'Discover your MBTI and find compatible personality types! Identify people with compatible personalities who will make great companions for the rest of your life journey.'
   },
   robots: {
     index: true,
