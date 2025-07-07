@@ -30,9 +30,9 @@ const mbtiInfo = {
   'ESFP': { emoji: '🎪', name: 'Entertainer', color: '#E84393' }
 }
 
-export default async function Image({ params }: { params: { type: string } }) {
+export default async function Image({ params }) {
   const mbtiType = params.type.toUpperCase()
-  const typeInfo = mbtiInfo[mbtiType as keyof typeof mbtiInfo] || { emoji: '🌟', name: 'Personality', color: '#667eea' }
+  const typeInfo = mbtiInfo[mbtiType] || { emoji: '🌟', name: 'Personality', color: '#667eea' }
 
   return new ImageResponse(
     (
